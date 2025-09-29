@@ -1,39 +1,14 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
 # Pets Meetup
 ## サイト概要
 
 ### サイトテーマ
-可愛いペットを自慢しあうサイト 
+可愛いペットの可愛い写真を自慢し合う、コミュニティサイト 
 ​
 ### テーマを選んだ理由
-・自分自身動物が好きで、現在うさぎを２匹飼っています。日々の可愛いところをもっと自慢したいと頭を悩ませていました。  
-・そこでペット特化型の画像や動画を投稿できるサービスがあれば便利だと考えました。  
-・また動物特有の仕草などで不明なことなどを相談できるコミュニティがあると便利だと思いました。  
-・当問題を解決するために、このようなポートフォリオを制作してみようと考えました。  
+自分自身動物が好きで、現在うさぎを２匹飼っています。日々の可愛いところをもっと自慢したいと頭を悩ませていました。  
+そこでペット特化型の画像や動画を投稿できるサービスがあれば便利だと考えました。  
+また動物特有の仕草などで不明なことを相談できるコミュニティがあると便利だと思いました。  
+当問題を解決するために、このようなポートフォリオを制作してみようと考えました。  
 ​
 ### ターゲットユーザ
 ・ペットを飼っており、たくさんの人に見てほしいと考えている人。  
