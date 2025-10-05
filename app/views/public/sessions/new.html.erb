@@ -1,0 +1,39 @@
+<div class='container W-100 my-3'>
+  <div class='row my-4 w-75'>
+    <div class="col-12">
+      <h1 class="table-light thead-color px-3 mb-2 fs-6 text-start d-inline-block">
+        ログイン
+      </h1>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="form-row mb-3">
+          <div class="col-form-label col-md-4">
+            メールアドレス
+          </div>
+          <div class="col-md-4">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          </div>
+        </div>
+
+        <div class="form-row mb-3">
+          <div class="col-form-label col-md-4">
+            パスワード(6文字以上)
+          </div>
+          <div class="col-md-4">
+            <%= f.password_field :password, autocomplete: "current-password" %>
+          </div>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+
+        <div class="actions">
+          <%= f.submit "Log in" %>
+        </div>
+      <% end %>
+
+      <%= render "public/shared/links" %>
