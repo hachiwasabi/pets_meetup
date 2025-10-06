@@ -4,6 +4,9 @@
       <h1 class="table-light thead-color px-3 mb-2 fs-6 text-start d-inline-block">
         ログイン
       </h1>
+      
+      <br>
+      <%= flash[:alert] %>
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-row mb-3">

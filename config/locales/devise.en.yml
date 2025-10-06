@@ -63,3 +63,43 @@ en:
       not_saved:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
+
+ja:
+  devise:
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+      already_signed_out: "すでにログアウトしています。"
+    registrations:
+      signed_up: "アカウント登録が完了しました。"
+      updated: "アカウント情報を更新しました。"
+      destroyed: "アカウントを削除しました。"
+    failure:
+      invalid: "メールアドレスまたはパスワードが正しくありません。"
+      not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+      unauthenticated: "ログインしてください。"
+    passwords:
+      send_instructions: "パスワードリセットの案内を送信しました。"
+      updated: "パスワードを更新しました。"
+  activerecord:
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認）
+        pet_type: ペットの種類／好きな動物
+        pet_name: ペットの名前
+        bio: 自己紹介文
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "を入力してください"
+            pet_type:
+              blank: "を入力してください"
+            pet_name:
+              blank: "を入力してください"
+            bio:
+              blank: "を入力してください"
