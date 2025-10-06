@@ -1,0 +1,52 @@
+<div class="container my-5">
+  <h2 class="mb-4 text-center">マイページ</h2>
+
+  <div class="card p-4 mb-5">
+    <h4 class="mb-3">登録情報</h4>
+    <table class="table table-bordered">
+      <tr>
+        <th>名前</th>
+        <td><%= @user.name %></td>
+      </tr>
+      <tr>
+        <th>メールアドレス</th>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <th>ペットの種類／好きな動物</th>
+        <td><%= @user.pet_type %></td>
+      </tr>
+      <tr>
+        <th>ペットの名前</th>
+        <td><%= @user.pet_name %></td>
+      </tr>
+      <tr>
+        <th>自己紹介</th>
+        <td><%= @user.bio %></td>
+      </tr>
+    </table>
+
+    <div class="d-flex justify-content-between mt-4">
+      <%= link_to "プロフィールを編集", edit_user_path(@user), class: "btn btn-primary" %>
+      <%= button_to "退会する", withdraw_user_path(@user), method: :patch,
+          data: { confirm: "本当に退会しますか？" },
+          class: "btn btn-danger" %>
+    </div>
+  </div>
+
+  <div>
+    <h4 class="mb-3">あなたの投稿一覧</h4>
+    <% if @posts.any? %>
+      <div class="list-group">
+        <% @posts.each do |post| %>
+          <%= link_to post_path(post), class: "list-group-item list-group-item-action" do %>
+            <strong><%= post.title %></strong><br>
+            <small class="text-muted"><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></small>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <p>まだ投稿はありません。</p>
+    <% end %>
+  </div>
+</div>

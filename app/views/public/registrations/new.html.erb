@@ -1,9 +1,9 @@
 <div class='container W-100 my-3'>
   <div class='row my-4 w-75'>
     <div class="col-12">
-      <h4 class="table-light thead-color px-3 mb-2 fs-6 text-start d-inline-block">
+      <h1 class="table-light thead-color px-3 mb-2 fs-2 text-start d-inline-block">
         新規会員登録
-      </h4>
+      </h1>
 
       <br>
       <%= render "public/shared/error_messages", resource: resource %>
@@ -16,7 +16,7 @@
           </div>
           <div class="col-md-4">
             <div class="col-sm-8">
-              <%= f.text_field :name, class: "form-control", placeholder: "犬田　猫郎" %>
+              <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "犬田　猫郎" %>
             </div>
           </div>
         </div>
@@ -26,7 +26,7 @@
             メールアドレス
           </div>
           <div class="col-md-4">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "sample@example.com" %>
+            <%= f.email_field :email, autocomplete: "email", class: "form-control", placeholder: "sample@example.com" %>
           </div>
         </div>
 

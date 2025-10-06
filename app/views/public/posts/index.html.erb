@@ -1,0 +1,22 @@
+<h1 class="mb-4">みんなの投稿</h1>
+
+<% if user_signed_in? %>
+  <%= link_to "新規投稿", new_post_path, class: "btn btn-primary mb-3" %>
+<% else %>
+  <p class="text-muted">
+    ※ 投稿するには <%= link_to "ログイン", new_user_session_path %> または
+    <%= link_to "新規登録", new_user_registration_path %> が必要です。
+  </p>
+<% end %>
+
+<% @posts.each do |post| %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5><%= link_to post.title, post_path(post) %></h5>
+      <p><%= truncate(post.body, length: 100) %></p>
+      <small class="text-muted">
+        投稿者: <%= post.user.name %> | <%= l(post.created_at, format: :short) %>
+      </small>
+    </div>
+  </div>
+<% end %>
