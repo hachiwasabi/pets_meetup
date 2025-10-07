@@ -1,4 +1,37 @@
 /*
+
+.header {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  white-space: nowrap;
+}
+
+.header-logo {
+  width: 60px;
+  height: auto;
+}
+
+.welcome-text {
+  font-size: 1rem;
+  color: #333;
+  white-space: nowrap;
+}
+
+.nav-btn {
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 4px 10px; /* ← 小さめでコンパクト */
+  font-size: 0.9rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  background-color: #f8f8f8;
+}
+
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *

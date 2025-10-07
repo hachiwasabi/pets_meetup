@@ -1,4 +1,44 @@
-<h1>PetsMeetupようこそ</h1>
+<div class="container my-5">
+  <div class="text-center mb-5">
+    <h1 class="fw-bold mb-3">Pets Meetupについて</h1>
+    <p class="text-muted fs-5">
+      ペットや動物が大好きな人たちがつながるコミュニティサイトです。
+    </p>
+  </div>
 
-  <%= image_tag "aboutpet.jpg", style: "width: 10%;" %>
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6 mb-4 mb-md-0">
+      <%= image_tag "aboutpet.jpg", alt: "動物たちの写真", class: "img-fluid rounded shadow" %>
+    </div>
+    <div class="col-md-6">
+      <h3 class="fw-bold mb-3">Pets Meetupとは？</h3>
+      <p>
+        「Pets Meetup」は、犬・猫・うさぎ・鳥など、動物を愛するすべての人たちが集まる場所です。<br>
+        飼っているペットの写真を投稿したり、他のユーザーと交流したり、<br>
+        動物好きの仲間を見つけることができます。
+      </p>
+    </div>
+  </div>
+
+  <div class="bg-light rounded p-4 shadow-sm mb-5">
+    <h3 class="fw-bold mb-3 text-center">主な機能</h3>
+    <ul class="list-unstyled fs-5">
+      <li>🐾 ペットや動物に関する投稿をシェア</li>
+      <li>💬 ユーザー同士のコメント・交流</li>
+      <li>📸 マイページでプロフィールや投稿を管理</li>
+      <li>🌟 気になるユーザーをフォロー</li>
+    </ul>
+  </div>
+
+  <div class="text-center">
+    <% if user_signed_in? %>
+      <p class="fs-5">さあ、あなたも動物好きの仲間とつながりましょう！</p>
+      <%= link_to "投稿一覧へ", posts_path, class: "btn btn-success btn-lg mt-3" %>
+    <% else %>
+      <p class="fs-5">会員登録をして、動物たちとの楽しい時間を共有しませんか？</p>
+      <%= link_to "新規登録はこちら", new_user_registration_path, class: "btn btn-primary btn-lg mt-3" %>
+    <% end %>
+  </div>
+</div>
+
 

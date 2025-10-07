@@ -1,16 +1,22 @@
-<header class="custom-color d-flex justify-content-between align-items-center border-bottom px-4 py-2" style="border-color:black !important;">
-  <div>
+<header class="custom-color d-flex justify-content-between align-items-center border-bottom px-4" style="border-color:black !important; height: 80px;">
+  <!-- 左側：ロゴ -->
+  <div class="d-flex align-items-center">
     <%= link_to root_path do %>
-      <%= image_tag "aboutpet.jpg", style: "width: 10%;" %>
-    <% end %>
-    <% unless controller_path.start_with?('admin/') %>
-      <span class="ml-2">
-        ようこそ、<%= user_signed_in? ? current_user.name : "ゲスト" %>さん!
-      </span>
+      <%= image_tag "logo.jpg", style: "height: 70px;" %>
     <% end %>
   </div>
 
-  <nav class="d-flex">
+  <!-- 中央：ウェルカムテキスト -->
+  <% unless controller_path.start_with?('admin/') %>
+    <div class="d-flex justify-content-center align-items-center flex-grow-1" style="height: 100%;">
+      <span class="welcome-text">
+        ようこそ、<%= user_signed_in? ? current_user.name : "ゲスト" %>さん!
+      </span>
+    </div>
+  <% end %>
+
+  <!-- 右側：ナビ -->
+  <nav class="d-flex align-items-center flex-nowrap">
     <% if admin_signed_in? %>
       <%= link_to "ユーザー一覧", admin_path, class: "btn btn-white mx-1" %>
       <%= link_to "投稿一覧", posts_path, class: "btn btn-white mx-1" %>
