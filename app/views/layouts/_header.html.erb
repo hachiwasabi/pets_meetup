@@ -1,4 +1,4 @@
-<header class="custom-color d-flex justify-content-between align-items-center border-bottom px-4" style="border-color:black !important; height: 80px;">
+<header class="custom-color d-flex justify-content-between align-items-center border-bottom px-4" style="border-color:black !important; height: 80px; position: relative; z-index: 1030;">
   <!-- 左側：ロゴ -->
   <div class="d-flex align-items-center">
     <%= link_to root_path do %>
@@ -6,7 +6,7 @@
     <% end %>
   </div>
 
-  <!-- 中央：ウェルカムテキスト -->
+  <!-- 中央：ゲスト名 -->
   <% unless controller_path.start_with?('admin/') %>
     <div class="d-flex justify-content-center align-items-center flex-grow-1" style="height: 100%;">
       <span class="welcome-text">
@@ -18,22 +18,20 @@
   <!-- 右側：ナビ -->
   <nav class="d-flex align-items-center flex-nowrap">
     <% if admin_signed_in? %>
-      <%= link_to "ユーザー一覧", admin_path, class: "btn btn-white mx-1" %>
-      <%= link_to "投稿一覧", posts_path, class: "btn btn-white mx-1" %>
-      <%= link_to "グループ一覧", admin_path, class: "btn btn-white mx-1" %>
-      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-white mx-1" %>
-
+      <%= link_to "ユーザー一覧", admin_path, class: "btn btn-light mx-1" %>
+      <%= link_to "投稿一覧", posts_path, class: "btn btn-light mx-1" %>
+      <%= link_to "グループ一覧", admin_path, class: "btn btn-light mx-1" %>
+      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-light mx-1" %>
     <% elsif user_signed_in? %>
-      <%= link_to "マイページ", mypage_user_path(current_user), class: "btn btn-white mx-1" %>
-      <%= link_to "投稿一覧", posts_path, class: "btn btn-white mx-1" %>
-      <%= link_to "グループ一覧", root_path, class: "btn btn-white mx-1" %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-white mx-1" %>
-
+      <%= link_to "マイページ", mypage_user_path(current_user), class: "btn btn-light mx-1" %>
+      <%= link_to "投稿一覧", posts_path, class: "btn btn-light mx-1" %>
+      <%= link_to "グループ一覧", root_path, class: "btn btn-light mx-1" %>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-light mx-1" %>
     <% else %>
-      <%= link_to "About", about_path, class: "btn btn-white mx-1" %>
-      <%= link_to "投稿一覧", posts_path, class: "btn btn-white mx-1" %>
-      <%= link_to "新規登録", new_user_registration_path, class: "btn btn-white mx-1" %>
-      <%= link_to "ログイン", new_user_session_path, class: "btn btn-white mx-1" %>
+      <%= link_to "About", about_path, class: "btn btn-light mx-1" %>
+      <%= link_to "投稿一覧", posts_path, class: "btn btn-light mx-1" %>
+      <%= link_to "新規登録", new_user_registration_path, class: "btn btn-light mx-1" %>
+      <%= link_to "ログイン", new_user_session_path, class: "btn btn-light mx-1" %>
     <% end %>
   </nav>
 </header>
