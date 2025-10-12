@@ -1,4 +1,10 @@
-/*
+
+@import "bootstrap";   
+@import "public/*";
+@import "custom";      
+
+
+/*   
 
 body {
   background-image: image-url("hoge.jpg");
@@ -25,7 +31,7 @@ body {
   color: #333;
   background-color: #fff;
   border: 1px solid #ccc;
-  padding: 4px 10px; // ← 小さめでコンパクト 
+  padding: 4px 10px; 
   font-size: 0.9rem;
   text-decoration: none;
   white-space: nowrap;
