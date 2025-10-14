@@ -10,7 +10,15 @@
   <% unless controller_path.start_with?('admin/') %>
     <div class="d-flex justify-content-center align-items-center flex-grow-1" style="height: 100%;">
       <span class="welcome-text">
-        ようこそ、<%= user_signed_in? ? current_user.name : "ゲスト" %>さん!
+        ようこそ、
+        <% if admin_signed_in? %>
+          管理者
+        <% elsif user_signed_in? %>
+          <%= current_user.name %>
+        <% else %>
+          ゲスト
+        <% end %>
+        さん!
       </span>
     </div>
   <% end %>
