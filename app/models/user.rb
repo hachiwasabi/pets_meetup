@@ -22,4 +22,18 @@ class User < ApplicationRecord
     is_active ? super : :deleted_account
   end
   
+  def self.search_by(word, match)
+    case match
+    when "exact"
+      where(name: word)
+    when "forward"
+      where("name LIKE ?", "#{word}%")
+    when "backward"
+      where("name LIKE ?", "%#{word}")
+    else
+      where("name LIKE ?", "%#{word}%")
+    end
+  end
+
+  
 end

@@ -1,0 +1,13 @@
+<h2>検索結果</h2>
+
+<% if @results.present? %>
+  <% @results.each do |result| %>
+    <% if @range == "users" %>
+      <p><%= link_to result.name, user_path(result) %></p>
+    <% else %>
+      <p><%= link_to result.title, post_path(result) %></p>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>該当する結果はありませんでした。</p>
+<% end %>

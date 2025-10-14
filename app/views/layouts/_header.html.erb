@@ -6,7 +6,7 @@
     <% end %>
   </div>
 
-  <!-- 中央：ゲスト名 -->
+  <!-- 中央：ゲスト名、検索機能 -->
   <% unless controller_path.start_with?('admin/') %>
     <div class="d-flex justify-content-center align-items-center flex-grow-1" style="height: 100%;">
       <span class="welcome-text">
@@ -14,6 +14,15 @@
       </span>
     </div>
   <% end %>
+  <% if user_signed_in? %>
+    <%= form_with url: search_path, method: :get, local: true, class: "d-flex align-items-center" do |f| %>
+      <%= f.select :range, [["ユーザー", "users"], ["投稿", "posts"]], {}, class: "form-select me-2" %>
+      <%= f.select :match, [["完全一致", "exact"], ["前方一致", "forward"], ["後方一致", "backward"], ["部分一致", "partial"]], {}, class: "form-select me-2" %>
+      <%= f.text_field :word, placeholder: "キーワード検索", class: "form-control me-2" %>
+      <%= f.submit "検索", class: "btn btn-outline-primary" %>
+    <% end %>
+  <% end %>
+
 
   <!-- 右側：ナビ -->
   <nav class="d-flex align-items-center flex-nowrap">
