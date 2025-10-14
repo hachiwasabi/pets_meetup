@@ -8,4 +8,37 @@
   <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger" %>
 <% end %>
 
+<hr>
+<h3>コメント一覧</h3>
+
+<div class="mb-4">
+  <% @post.comments.each do |comment| %>
+    <div class="border p-2 mb-2">
+      <strong><%= comment.user.name %></strong>：
+      <%= comment.content %>
+
+      <% if user_signed_in? && comment.user_id == current_user.id %>
+        <%= link_to "削除", post_comment_path(@post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger ms-2" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<% if user_signed_in? %>
+  <% if @post.user_id != current_user.id %>
+    <h4>コメントを書く</h4>
+    <%= form_with model: [@post, Comment.new], local: true do |f| %>
+      <div class="mb-3">
+        <%= f.text_area :content, rows: 3, class: "form-control", placeholder: "コメントを入力..." %>
+      </div>
+      <%= f.submit "コメントする", class: "btn btn-primary" %>
+    <% end %>
+  <% else %>
+    <p class="text-muted">※自分の投稿にはコメントできません</p>
+  <% end %>
+<% else %>
+  <p>※ コメントするには <%= link_to "ログイン", new_user_session_path %> が必要です。</p>
+<% end %>
+
+
 <%= link_to "一覧へ戻る", posts_path, class: "btn btn-secondary mt-3" %>

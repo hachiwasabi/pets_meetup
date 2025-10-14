@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 
   scope module: :public do
     get "search", to: "searches#index", as: "search"
-    resources :posts
+    resources :posts do
+      resources :comments, only: [:create, :destroy]
+    end
     resources :users, only: [:edit, :update, :show] do
       member do
         get :mypage
