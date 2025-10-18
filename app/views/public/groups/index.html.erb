@@ -1,0 +1,32 @@
+<div class="container my-4">
+  <h2 class="mb-3">グループ一覧</h2>
+
+  <%= link_to "グループを作成", new_group_path, class: "btn btn-success mb-3" %>
+
+  <table class="table table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>グループ名</th>
+        <th>作成者</th>
+        <th>参加メンバー数</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @groups.each do |group| %>
+        <tr>
+          <td><%= link_to group.name, group_path(group) %></td>
+          <td><%= group.owner.name %></td>
+          <td><%= group.group_members.approved.count %>人</td>
+          <td>
+            <% unless group.owner_id == current_user.id || group.group_members.exists?(user_id: current_user.id) %>
+              <%= button_to "参加申請", join_request_group_path(group), method: :post, class: "btn btn-primary btn-sm" %>
+            <% else %>
+              <span class="text-muted">申請済み / 参加中</span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

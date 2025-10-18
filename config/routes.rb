@@ -4,15 +4,16 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  namespace :admin do
-    resources :users, only: [:index, :show, :destroy]
-    resources :posts, only: [:index, :show, :destroy]
-  end
-
   devise_for :users,controllers: {
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
+
+  namespace :admin do
+    resources :users, only: [:index, :show, :destroy]
+    resources :posts, only: [:index, :show, :destroy]
+    resources :groups, only: [:index, :destroy]
+  end
 
   scope module: :public do
     get "search", to: "searches#index", as: "search"
@@ -23,6 +24,13 @@ Rails.application.routes.draw do
       member do
         get :mypage
         patch :withdraw
+      end
+    end
+    resources :groups do
+      member do
+        post 'join_request'
+        patch 'approve/:member_id', to: "groups#approve", as: "approve_member"
+        patch 'reject/:member_id', to: "groups#reject", as: "reject_member"
       end
     end
   end

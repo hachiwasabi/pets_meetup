@@ -1,0 +1,17 @@
+<div class="container my-4">
+  <h2 class="mb-3">グループ作成</h2>
+
+  <%= form_with model: @group, url: groups_path, local: true, class: "card p-4" do |f| %>
+    <div class="mb-3">
+      <%= f.label :name, "グループ名" %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :description, "説明 / ルール" %>
+      <%= f.text_area :description, class: "form-control", rows: 4 %>
+    </div>
+
+    <%= f.submit "作成する", class: "btn btn-success" %>
+  <% end %>
+</div>
