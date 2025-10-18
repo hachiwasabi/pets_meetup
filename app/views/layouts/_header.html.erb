@@ -37,7 +37,7 @@
     <% if admin_signed_in? %>
       <%= link_to "ユーザー一覧", admin_users_path, class: "btn btn-light mx-1" %>
       <%= link_to "投稿一覧", root_path, class: "btn btn-light mx-1" %>
-      <%= link_to "グループ一覧", root_path, class: "btn btn-light mx-1" %>
+      <%= link_to "グループ一覧", admin_groups_path, class: "btn btn-light mx-1" %>
       <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-light mx-1" %>
     <% elsif user_signed_in? %>
       <%= link_to "マイページ", mypage_user_path(current_user), class: "btn btn-light mx-1" %>
