@@ -49,4 +49,21 @@
       <p>まだ投稿はありません。</p>
     <% end %>
   </div>
+  
+  <div class="mt-5">
+    <h4 class="mb-3">参加中のグループ</h4>
+    <% if @user.group_members.approved.any? %>
+      <ul class="list-group">
+        <% @user.group_members.approved.each do |gm| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <%= link_to gm.group.name, group_path(gm.group) %>
+            <span class="badge bg-primary">参加中</span>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-muted">まだ参加中のグループはありません。</p>
+    <% end %>
+  </div>
+
 </div>
