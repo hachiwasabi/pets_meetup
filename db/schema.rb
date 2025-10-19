@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_10_18_030830) do
+ActiveRecord::Schema.define(version: 2025_10_18_092355) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -53,6 +53,16 @@ ActiveRecord::Schema.define(version: 2025_10_18_030830) do
     t.index ["owner_id"], name: "index_groups_on_owner_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.integer "group_id", null: false
+    t.integer "user_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_messages_on_group_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -83,5 +93,7 @@ ActiveRecord::Schema.define(version: 2025_10_18_030830) do
   add_foreign_key "comments", "users"
   add_foreign_key "group_members", "groups"
   add_foreign_key "group_members", "users"
+  add_foreign_key "messages", "groups"
+  add_foreign_key "messages", "users"
   add_foreign_key "posts", "users"
 end

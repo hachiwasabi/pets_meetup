@@ -53,4 +53,27 @@
     <% end %>
   </div>
 
+  <h4 class="mt-5">グループチャット</h4>
+  <div class="card p-3 mb-3" style="height: 300px; overflow-y: auto;">
+    <% @group.messages.order(created_at: :asc).each do |msg| %>
+      <div class="mb-2">
+        <strong><%= msg.user.name %>:</strong>
+        <span><%= msg.content %></span>
+        <small class="text-muted float-end"><%= msg.created_at.strftime("%H:%M") %></small>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @group.group_members.approved.exists?(user_id: current_user.id) || @group.owner_id == current_user.id %>
+    <%= form_with model: [@group, Message.new], local: true do |f| %>
+      <div class="input-group">
+        <%= f.text_field :content, class: "form-control", placeholder: "メッセージを入力..." %>
+        <button class="btn btn-primary">送信</button>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-muted">※ グループ参加後にチャットが利用できます</p>
+  <% end %>
+
+
 </div>

@@ -32,6 +32,7 @@ Rails.application.routes.draw do
         patch 'approve/:member_id', to: "groups#approve", as: "approve_member"
         patch 'reject/:member_id', to: "groups#reject", as: "reject_member"
       end
+      resources :messages, only: [:create]
     end
   end
 
