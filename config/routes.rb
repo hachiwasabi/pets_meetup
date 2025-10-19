@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :destroy]
     resources :posts, only: [:index, :show, :destroy]
     resources :groups, only: [:index, :destroy]
+    resources :comments, only: [:index, :destroy]
   end
 
   scope module: :public do
