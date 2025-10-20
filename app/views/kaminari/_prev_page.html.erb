@@ -1,0 +1,3 @@
+<li class="page-item <%= 'disabled' unless prev_page %>">
+  <%= link_to "Previous", url_for(params.merge(page: prev_page || 1)), class: "page-link" %>
+</li>

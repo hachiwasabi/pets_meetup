@@ -1,0 +1,3 @@
+<li class="page-item <%= 'disabled' unless next_page %>">
+  <%= link_to "Next", url_for(params.merge(page: next_page || total_pages)), class: "page-link" %>
+</li>

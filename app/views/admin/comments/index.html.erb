@@ -36,3 +36,5 @@
 <% end %>
 
 <%= link_to "管理トップへ戻る", admin_users_path || admin_posts_path, class: "btn btn-secondary mt-3" %>
+
+<%= paginate @comments %>

@@ -1,0 +1,3 @@
+<li class="page-item <%= 'disabled' if current_page == total_pages %>">
+  <%= link_to "Last", url_for(params.merge(page: total_pages)), class: "page-link" %>
+</li>

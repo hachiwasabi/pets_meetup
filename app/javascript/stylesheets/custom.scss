@@ -1,0 +1,25 @@
+// app/javascript/stylesheets/custom.scss
+
+.btn-white {
+  display: inline-block !important;
+  white-space: nowrap !important;
+  writing-mode: horizontal-tb !important;
+}
+
+.custom-color {
+  background-color: #f8f9fa;
+  padding: 0.5rem 1rem;
+}
+
+.bg-soft-orange { background-color: #FFE5B4 !important; }
+.bg-soft-green  { background-color: #DFFFD6; }
+.bg-soft-pink   { background-color: #FFE4EC; }
+.bg-soft-blue   { background-color: #E3F2FD; }
+
+.bg-soft-orange,
+.bg-soft-green,
+.bg-soft-pink,
+.bg-soft-blue {
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+}
