@@ -1,5 +1,4 @@
 // app/javascript/stylesheets/custom.scss
-
 .btn-white {
   display: inline-block !important;
   white-space: nowrap !important;
@@ -7,19 +6,108 @@
 }
 
 .custom-color {
-  background-color: #f8f9fa;
+  background-color: #F8F9FA;
   padding: 0.5rem 1rem;
 }
 
-.bg-soft-orange { background-color: #FFE5B4 !important; }
+.bg-soft-orange {
+  background-color: #FFE5B4;
+  color: #e65100;  
+  transition: background-color 0.3s; 
+}
+
+.bg-soft-orange:hover {
+  background-color: #FFCC80; 
+  color: #bf360c; 
+}
+
+.bg-orange {
+  background-color: #FFE5B4;
+  color: #e65100;  
+  transition: background-color 0.3s; 
+}
+
+.btn-soft-blue {
+  background-color: #E3F2FD; /* 淡い水色 */
+  color: #1565C0;            /* 文字をやや濃いブルーに */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-soft-blue:hover {
+  background-color: #BBDEFB; /* 少し濃く */
+  color: #0D47A1;            /* 濃い青でホバー感 */
+}
+
+.custom-orange {
+  color: #e65100;
+  transition: background-color 0.3s;  
+}
+
+.custom-card {
+  background-color: #fff8e1; 
+  border: 3px solid #ffa726; 
+}
+
+.custom-card h5 a {
+  color: #e65100; 
+  text-decoration: none;
+}
+
+.custom-card h5 a:hover {
+  color: #ff9800; 
+  text-decoration: underline;
+}
+
+.custom-hr {
+  border: none;               
+  border-top: 3px solid #FFA726; 
+  margin: 2rem 0;            
+}
+
+.comment-textarea {
+  border: 2px solid #FFB74D;  
+  border-radius: 8px;         
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.comment-textarea:focus {
+  border-color: #FB8C00;      
+  box-shadow: 0 0 6px rgba(251, 140, 0, 0.4); 
+}
+
+.custom-orange th,
+tr.custom-orange th {
+  color: #e65100;
+}
+
+.group-link {
+  color: #e65100;  
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.group-link:hover {
+  color: #ff9800;
+  text-decoration: underline;
+}
+
 .bg-soft-green  { background-color: #DFFFD6; }
 .bg-soft-pink   { background-color: #FFE4EC; }
 .bg-soft-blue   { background-color: #E3F2FD; }
-
-.bg-soft-orange,
 .bg-soft-green,
 .bg-soft-pink,
 .bg-soft-blue {
   border-radius: 6px;
   padding: 0.4rem 0.8rem;
 }
+
+
+
+
+
+
+
+
+
+
+

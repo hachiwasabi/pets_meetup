@@ -32,6 +32,16 @@
 
         <div class="form-row mb-3">
           <div class="col-form-label col-md-4">
+            プロフィール画像（必須）
+          </div>
+          <div class="col-md-8">
+            <%= f.file_field :profile_image, class: "form-control" %>
+          </div>
+        </div>
+
+
+        <div class="form-row mb-3">
+          <div class="col-form-label col-md-4">
             ペットの種類／好きな動物
           </div>
           <div class="col-md-8">

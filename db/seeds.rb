@@ -15,7 +15,11 @@ yamada = User.find_or_create_by!(email: "yamada@example.com") do |user|
   user.password = "password"
   user.pet_type = "犬"
   user.pet_name = "ポチ"
-  user.bio = "黒の豆柴です。好奇心旺盛です。"
+  user.bio = "自慢の可愛いサモエドちゃんです。好奇心旺盛です。"
+  user.profile_image.attach(
+  io: File.open(Rails.root.join("app/assets/images/dog_profile.jpg")),
+  filename: "dog_profile.jpg"
+  )
 end
 
 tanaka = User.find_or_create_by!(email: "tanaka@example.com") do |user|
@@ -23,26 +27,39 @@ tanaka = User.find_or_create_by!(email: "tanaka@example.com") do |user|
   user.password = "password"
   user.pet_type = "猫"
   user.pet_name = "タマ"
-  user.bio = "スコティッシュフォールドです。やんちゃですがかわいいです。"
+  user.bio = "我が家の癒し担当です。やんちゃですがかわいいです。"
+  user.profile_image.attach(
+  io: File.open(Rails.root.join("app/assets/images/cat_profile.jpg")),
+  filename: "cat_profile.jpg"
+  )
 end
+
 
 satou = User.find_or_create_by!(email: "satou@example.com") do |user|
   user.name = "佐藤　花子"
   user.password = "password"
   user.pet_type = "うさぎ"
-  user.pet_name = "とき、ひかり"
-  user.bio = "うさぎ２匹飼っています。黒とグレーのライオンラビット２匹です。"
+  user.pet_name = "もち"
+  user.bio = "寂しがり屋のロップイヤーなので、毎日たくさん遊んでます！"
+  user.profile_image.attach(
+  io: File.open(Rails.root.join("app/assets/images/rabbit_profile.jpg")),
+  filename: "rabbit_profile.jpg"
+  )
 end
 
 
-Post.find_or_create_by!(title: "なんでも興味津々", user: yamada) do |post|
+
+post1 = Post.find_or_create_by!(title: "なんでも興味津々", user: yamada) do |post|
   post.body = "いつも僕のあとをついてきて、やることなすことに興味津々。そこがすごくかわいくて魅力的です。"
+  post.images.attach([  { io: File.open(Rails.root.join("app/assets/images/dog_post.jpg")), filename: "dog_post.jpg" } ])
 end
 
-Post.find_or_create_by!(title: "今日もまた食器が…", user: tanaka) do |post|
+post2 = Post.find_or_create_by!(title: "今日もまた食器が…", user: tanaka) do |post|
   post.body = "愛猫。とてもかわいいのですが、今日もまたテーブルの上のコップを落としてしまいました…可愛いんですけどね…(´;ω;｀)"
+  post.images.attach([  { io: File.open(Rails.root.join("app/assets/images/cat_post.jpg")), filename: "cat_post.jpg" } ])
 end
 
-Post.find_or_create_by!(title: "気分屋の２匹", user: satou) do |post|
-  post.body = "一緒に行動することが多い２匹。１匹が移動すると少し経ってから追いかけて、ゴロンとしています。触らせてくれる時とそうじゃないときがあるので、そこは時の運です。笑"
+post3 = Post.find_or_create_by!(title: "甘えん坊", user: satou) do |post|
+  post.body = "寂しがり屋で横で良くゴロンとしています。触らせてくれる時とそうじゃないときがあるので、そこは時の運です。"
+  post.images.attach([  { io: File.open(Rails.root.join("app/assets/images/rabbit_post.jpg")), filename: "rabbit_post.jpg" } ])
 end

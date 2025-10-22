@@ -31,4 +31,5 @@
 ​
 ## 使用素材
 ・Canva様（ロゴ）
-・Unsplash+様（about,topページ）
+・Unsplash+様（aboutページ画像、プロフィール画像、投稿画像）
+・
