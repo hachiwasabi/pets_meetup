@@ -1,5 +1,6 @@
 <div class="container my-5 px-sm-0">
-  <h1 class="mb-4 custom-orange">・<%= @post.title %></h1>
+  <h1 class="mb-4 custom-orange"><%= @post.user.name %>さんの投稿</h1>
+  <h3><%= @post.title %></h3>
   <p>・<%= @post.body %></p>
 
   <div class="d-flex flex-wrap gap-2">
