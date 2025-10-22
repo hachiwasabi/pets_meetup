@@ -1,13 +1,16 @@
-<h2>検索結果</h2>
+<div class="container my-3 px-sm-0">
+  <h1 class="mb-4 custom-orange text-center">検索結果</h1>
 
-<% if @results.present? %>
-  <% @results.each do |result| %>
-    <% if @range == "users" %>
-      <p><%= link_to result.name, user_path(result) %></p>
-    <% else %>
-      <p><%= link_to result.title, post_path(result) %></p>
+  <% if @results.present? %>
+    <% @results.each do |result| %>
+      <% if @range == "users" %>
+        <p><%= link_to result.name, user_path(result) %>さん</p>
+      <% else %>
+        <p><%= link_to result.title, post_path(result) %></p>
+      <% end %>
     <% end %>
+  <% else %>
+    <p>該当する結果はありませんでした。</p>
   <% end %>
-<% else %>
-  <p>該当する結果はありませんでした。</p>
-<% end %>
+
+</div>
