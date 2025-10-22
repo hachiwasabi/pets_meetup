@@ -1,47 +1,52 @@
 <div class="container my-5 px-sm-0">
-  <h1 class="mb-4 custom-orange"><%= @post.user.name %>さんの投稿</h1>
-  <h3><%= @post.title %></h3>
-  <p>・<%= @post.body %></p>
+  <div class="card mb-3 custom-card">
+    <div class="card-body">
+      <h2 class="custom-orange"><%= @post.user.name %>さんの投稿</h2>
+      <h4><%= @post.title %></h4>
+      <hr class="custom-hr">
+      <p class="my-1"><%= @post.body %></p>
 
-  <div class="d-flex flex-wrap gap-2">
-    <% @post.images.each_with_index do |image, index| %>
-      <!-- サムネイル画像 -->
-      <%= link_to "#imageModal#{index}", data: { bs_toggle: "modal" } do %>
-        <%= image_tag image, size: "200x200", class: "img-thumbnail", style: "object-fit: cover;" %>
-      <% end %>
+      <div class="d-flex flex-wrap gap-2">
+        <% @post.images.each_with_index do |image, index| %>
+          <!-- サムネイル画像 -->
+          <%= link_to "#imageModal#{index}", data: { bs_toggle: "modal" } do %>
+            <%= image_tag image, size: "200x200", class: "img-thumbnail", style: "object-fit: cover;" %>
+          <% end %>
 
-      <!-- モーダル本体 -->
-      <div class="modal fade" id="imageModal<%= index %>" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content bg-transparent border-0">
-            <div class="modal-body text-center p-0">
-              <%= image_tag image, class: "img-fluid rounded shadow-lg" %>
+          <!-- モーダル本体 -->
+          <div class="modal fade" id="imageModal<%= index %>" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+              <div class="modal-content bg-transparent border-0">
+                <div class="modal-body text-center p-0">
+                  <%= image_tag image, class: "img-fluid rounded shadow-lg" %>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
-    <% end %>
+
+      <p class="text-muted mt-3">投稿者: <%= @post.user.name %>さん</p>
+
+      <% if user_signed_in? && @post.user == current_user %>
+        <%= link_to "編集", edit_post_path(@post), class: "btn btn-outline-primary" %>
+        <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger" %>
+      <% end %>
+    </div>
   </div>
 
-  <p class="text-muted mt-3">投稿者: <%= @post.user.name %></p>
-
-  <% if user_signed_in? && @post.user == current_user %>
-    <%= link_to "編集", edit_post_path(@post), class: "btn btn-outline-primary" %>
-    <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger" %>
-  <% end %>
-
-  <hr class="custom-hr">
   <h3 class="mb-4 custom-orange">コメント一覧</h3>
 
   <div class="mb-4">
     <% @post.comments.each do |comment| %>
-      <div class="border p-2 mb-2">
-        <strong><%= comment.user.name %></strong>：
+      <div class="p-2 mb-2">
+        <strong><%= comment.user.name %>さん</strong>：
         <%= comment.content %>
-
+        
         <% if user_signed_in? && comment.user_id == current_user.id %>
           <%= link_to "削除", post_comment_path(@post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger ms-2" %>
         <% end %>
+        <hr class="custom-hr">
       </div>
     <% end %>
   </div>
@@ -61,5 +66,4 @@
   <% else %>
     <p>※ コメントするには <%= link_to "ログイン", new_user_session_path %> が必要です。</p>
   <% end %>
-
 </div>
