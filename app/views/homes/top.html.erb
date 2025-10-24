@@ -1,6 +1,91 @@
-<div class="position-relative d-inline-block">
-  
-  <p>TopPage</p>
-  
-</div>
+<div class="container my-5">
 
+  <!-- Hero Section -->
+  <div class="text-center mb-5 py-5 bg-soft-orange rounded-4 shadow-sm">
+    <h1 class="fw-bold mb-3 custom-orange">🐶 動物好きが集まるコミュニティ</h1>
+    <p class="lead text-muted mb-4">ペットの写真を共有したり、同じ趣味の仲間と話そう。</p>
+    <% if user_signed_in? %>
+      <%= link_to "🐾 新しい投稿を作成する", new_post_path, class: "btn btn-soft-blue btn-lg" %>
+    <% else %>
+      <%= link_to "新規登録して参加する", new_user_registration_path, class: "btn btn-soft-blue btn-lg" %>
+    <% end %>
+  </div>
+
+  <hr class="custom-hr mb-5">
+
+  <!-- 新着投稿 -->
+  <section class="mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="fw-bold custom-orange">🐾 新着投稿</h2>
+      <%= link_to "もっと見る", posts_path, class: "btn btn-soft-blue" %>
+    </div>
+
+    <div class="row g-4">
+      <% @posts.first(4).each do |post| %>
+        <div class="col-md-6 col-lg-3">
+          <div class="card post-card shadow-sm h-100">
+            <% if post.images.attached? %>
+              <%= link_to post_path(post) do %>
+                <%= image_tag post.images.first, size: "200x200", class: "card-img-top rounded-top" %>
+              <% end %>
+            <% else %>
+              <div class="bg-soft-orange text-center py-5 rounded-top">No Image</div>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title text-truncate mb-2">
+                <%= link_to post.title, post_path(post), class: "custom-orange text-decoration-none" %>
+              </h5>
+              <p class="card-text text-muted small mb-3">
+                <%= truncate(post.body, length: 60) %>
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">
+                  投稿者： <%= post.user.name if post.user %>さん
+                </small>
+                <small class="text-muted">
+                  <%= l(post.created_at, format: :short) %>
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <hr class="custom-hr mb-5">
+
+  <!-- 新着グループ -->
+  <section>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="fw-bold custom-orange">🐕‍🦺 新着グループ</h2>
+      <%= link_to "もっと見る", groups_path, class: "btn btn-soft-blue" %>
+    </div>
+
+    <div class="row g-4">
+      <% @groups.first(4).each do |group| %>
+        <div class="col-md-6 col-lg-3">
+          <div class="card group-card shadow-sm h-100">
+            <div class="card-body">
+              <h5 class="card-title mb-2">
+                <%= link_to group.name, group_path(group), class: "group-link" %>
+              </h5>
+              <p class="card-text text-muted small mb-3">
+                <%= truncate(group.description, length: 80) %>
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">
+                  メンバー：<%= group.members.count %>人
+                </small>
+                <small class="text-muted">
+                  <%= l(group.created_at, format: :short) %>
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+</div>

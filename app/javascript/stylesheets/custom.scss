@@ -157,6 +157,55 @@ tr.custom-orange th {
   padding: 0.4rem 0.8rem;
 }
 
+.navbar-toggler {
+  border: none;
+  background: transparent;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.navbar-nav .nav-link {
+  font-weight: 500;
+  color: #2e2e2e;
+  transition: color 0.2s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+/* ハンバーガーメニュー展開時、最前面に表示する */
+#mainNavbar {
+  position: absolute; /* 通常のレイアウトフローから外す */
+  top: 80px; /* ヘッダーの高さに合わせて調整 */
+  right: 0;
+  width: 150px; /* 好みで調整。100%でもOK */
+  z-index: 9999; /* 最前面に */
+  background-color: #ffa726; /* bg-orange と同じ色 */
+  border-radius: 0 0 0 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* メニューが閉じているときに高さを戻す */
+.navbar-collapse.collapse:not(.show) {
+  position: static;
+}
+
+/* メニュー内のリンクの見た目調整 */
+#mainNavbar .nav-link {
+  color: #2e2e2e;
+  font-weight: 500;
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+
+#mainNavbar .nav-link:hover {
+  color: #fff;
+}
+
+
 
 
 

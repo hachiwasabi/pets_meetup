@@ -2,6 +2,16 @@
   <h1 class="mb-4 custom-orange text-center">グループ作成</h1>
 
   <%= form_with model: @group, url: groups_path, local: true do |f| %>
+    <% if @group.errors.any? %>
+      <div class="alert alert-danger">
+        <ul>
+          <% @group.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <div class="mb-3">
       <%= f.label :name, "グループ名", class:"form-label custom-orange fs-5 fw-bold" %>
       <%= f.text_field :name, class: "form-control comment-textarea", placeholder: "例）集まれ！ワンちゃん大好き飼い主さん！"  %>

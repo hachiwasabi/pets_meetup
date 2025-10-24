@@ -1,5 +1,5 @@
 <div class="container my-5 px-sm-0">
-  <h1 class="mb-4 custom-orange">・<%= @group.name %></h1>
+  <h1 class="mb-4 custom-orange"><%= @group.name %></h1>
   <p class="text-muted">作成者: <%= @group.owner.name %>さん</p>
 
   <div class="card p-3 mb-4">
@@ -14,6 +14,7 @@
   <%# オーナー向け：承認待ちリスト表示 %>
   <% if @group.owner_id == current_user.id %>
     <div class="mt-4">
+      <hr class="custom-hr">
       <h4 class="mb-4 custom-orange">申請中のメンバー</h4>
       <% if @pending_members.any? %>
         <table class="table">
@@ -41,6 +42,7 @@
     </div>
   <% end %>
   <div class="mt-5">
+    <hr class="custom-hr">
     <h4 class="mb-4 custom-orange">参加メンバー一覧</h4>
     <% if @group.members.any? %>
       <ul class="list-group">
@@ -53,6 +55,7 @@
     <% end %>
   </div>
 
+  <hr class="custom-hr">
   <h4 class="mb-4 custom-orange">グループチャット</h4>
   <div class="card p-3 mb-3" style="height: 300px; overflow-y: auto;">
     <% @group.messages.order(created_at: :asc).each do |msg| %>

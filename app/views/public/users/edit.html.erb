@@ -1,6 +1,17 @@
 <div class="container my-5 px-sm-0">
   <h1 class="mb-4 custom-orange text-center">プロフィール編集</h1>
 
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger">
+      <h5>エラーがあります：</h5>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= form_with model: @user, url: user_path(@user), local: true do |f| %>
     <div class="form-group mb-3">
       <%= f.label :name, "名前", class:"form-label custom-orange fs-5 fw-bold" %>

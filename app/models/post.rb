@@ -6,6 +6,7 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { maximum: 50 }
   validates :body, presence: true, length: { maximum: 500 }
   validates :images, presence: true
+  
   def self.search_by(word, match)
     case match
     when "exact"

@@ -91,6 +91,7 @@ ja:
         pet_type: ペットの種類／好きな動物
         pet_name: ペットの名前
         bio: 自己紹介文
+        profile_image: プロフィール画像
     errors:
       models:
         user:
