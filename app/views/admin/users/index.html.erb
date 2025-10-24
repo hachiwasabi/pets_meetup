@@ -13,7 +13,7 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.id %></td>
-        <td><%= user.name %></td>
+        <td><%= user.name %>さん</td>
         <td><%= user.email %></td>
         <td><%= link_to "詳細", admin_user_path(user), class: "btn btn-sm btn-primary" %></td>
       </tr>
