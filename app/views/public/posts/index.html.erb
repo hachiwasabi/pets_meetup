@@ -1,22 +1,32 @@
-<h1 class="mb-4">みんなの投稿</h1>
+<div class="container my-5 px-sm-0">
+  <h1 class="mb-4 custom-orange text-center">みんなの投稿</h1>
 
-<% if user_signed_in? %>
-  <%= link_to "新規投稿", new_post_path, class: "btn btn-primary mb-3" %>
-<% else %>
-  <p class="text-muted">
-    ※ 投稿するには <%= link_to "ログイン", new_user_session_path %> または
-    <%= link_to "新規登録", new_user_registration_path %> が必要です。
-  </p>
-<% end %>
-
-<% @posts.each do |post| %>
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5><%= link_to post.title, post_path(post) %></h5>
-      <p><%= truncate(post.body, length: 100) %></p>
-      <small class="text-muted">
-        投稿者: <%= post.user.name %> | <%= l(post.created_at, format: :short) %>
-      </small>
+  <% if user_signed_in? %>
+    <div class="d-flex align-items-center mb-3">
+      <h4 class="custom-orange mb-3">可愛い写真を撮ったら投稿してみよう！！</h4>
+      <%= link_to "新規投稿", new_post_path, class: "btn btn-lg bg-soft-orange mb-3" %>
     </div>
-  </div>
-<% end %>
+  <% else %>
+    <p class="text-muted">
+      ※ 投稿するには <%= link_to "ログイン", new_user_session_path %> または
+      <%= link_to "新規登録", new_user_registration_path %> が必要です。
+    </p>
+  <% end %>
+
+  <% @posts.each do |post| %>
+    <div class="card mb-3 custom-card">
+      <div class="card-body">
+        <h5><%= link_to post.title, post_path(post) %></h5>
+        <% post.images.each do |image| %>
+          <%= link_to post_path(post) do %>
+            <% image_tag image, size: "200x200", class: "img-fluid rounded my-2" %>
+          <% end %>
+        <% end %>
+        <h6><%= truncate(post.body, length: 100) %></h6>
+        <small class="text-muted">
+          投稿者: <%= post.user.name %>さん | <%= l(post.created_at, format: :short) %>
+        </small>
+      </div>
+    </div>
+  <% end %>
+</div>

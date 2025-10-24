@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :owned_groups, class_name: "Group", foreign_key: "owner_id"
   has_many :group_members
   has_many :groups, through: :group_members
+  has_one_attached :profile_image
 
   scope :active, -> { where(is_active: true) }
 
@@ -17,6 +18,7 @@ class User < ApplicationRecord
   validates :pet_type, presence: true, length: { maximum: 50 }
   validates :pet_name, presence: true, length: { maximum: 30 }
   validates :bio, presence: true, length: { maximum: 200 }
+  validates :profile_image, presence: true
 
   def active_for_authentication?
     super && is_active

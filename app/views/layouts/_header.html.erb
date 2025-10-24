@@ -1,55 +1,69 @@
-<header class="custom-color d-flex justify-content-between align-items-center border-bottom px-4" style="border-color:black !important; height: 80px;">
-  <!-- 左側：ロゴ -->
-  <div class="d-flex align-items-center">
-    <%= link_to root_path do %>
-      <%= image_tag "logo.jpg", style: "height: 70px;" %>
-    <% end %>
-  </div>
+<header class="navbar bg-orange border-bottom px-4 shadow-sm" style="border-color:black !important; height: 80px;">
+  <div class="container-fluid d-flex align-items-center">
 
-  <!-- 中央：ゲスト名/検索機能 -->
-  <% unless controller_path.start_with?('admin/') %>
-    <div class="d-flex justify-content-center align-items-center flex-grow-1" style="height: 100%;">
-      <span class="welcome-text">
-        ようこそ、
-        <% if admin_signed_in? %>
-          管理者
-        <% elsif user_signed_in? %>
-          <%= current_user.name %>
-        <% else %>
-          ゲスト
+    <!-- 左側：ロゴ -->
+    <%= link_to root_path, class: "navbar-brand d-flex" do %>
+      <%= image_tag "logo.jpg", style: "height: 60px;"%>
+    <% end %>
+
+    <!-- 中央：挨拶・検索機能 -->
+    <% unless controller_path.start_with?('admin/') %>
+      <div class="d-none d-md-flex justify-content-center align-items-center flex-grow-1" style="height: 100%;">
+        <span class="welcome-text cutsom-orange">
+          ようこそ、
+          <% if admin_signed_in? %>
+            管理者
+          <% elsif user_signed_in? %>
+            <%= current_user.name %>
+          <% else %>
+            ゲスト
+          <% end %>
+          さん！
+        </span>
+      </div>
+    <% end %>
+
+    <% if user_signed_in? && !admin_signed_in? %>
+      <div class="d-none d-md-flex align-items-center ms-3">
+        <%= form_with url: search_path, method: :get, local: true, class: "d-flex align-items-center" do |f| %>
+          <%= f.select :range, [["ユーザー", "users"], ["投稿", "posts"]], {}, class: "form-select me-2" %>
+          <%= f.select :match, [["完全一致", "exact"], ["前方一致", "forward"], ["後方一致", "backward"], ["部分一致", "partial"]], {}, class: "form-select me-2" %>
+          <%= f.text_field :word, placeholder: "キーワード検索", class: "form-control me-2" %>
+          <%= f.submit "検索", class: "btn btn-outline-primary" %>
         <% end %>
-        さん!
-      </span>
+      </div>
+    <% end %>
+
+    <!-- 右側：ナビ（ハンバーガーメニュー） -->
+    <div class="d-flex align-items-center ms-auto">
+      <!-- ハンバーガーボタン -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+        aria-controls="mainNavbar" aria-expanded="false" aria-label="ナビゲーション切り替え">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- 折りたたみ部分 -->
+      <div class="collapse navbar-collapse justify-content-end mt-2 mt-md-0" id="mainNavbar">
+        <ul class="navbar-nav align-items-md-center ms-auto text-center bg-orange p-3 rounded shadow-sm">
+          <% if admin_signed_in? %>
+            <li class="nav-item"><%= link_to "ユーザー管理", admin_users_path, class: "nav-link text-danger" %></li>
+            <li class="nav-item"><%= link_to "投稿管理", admin_posts_path, class: "nav-link text-danger" %></li>
+            <li class="nav-item"><%= link_to "コメント管理", admin_comments_path, class: "nav-link text-danger" %></li>
+            <li class="nav-item"><%= link_to "グループ管理", admin_groups_path, class: "nav-link text-danger" %></li>
+            <li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link text-danger" %></li>
+          <% elsif user_signed_in? %>
+            <li class="nav-item"><%= link_to "マイページ", mypage_user_path(current_user), class: "nav-link text-danger" %></li>
+            <li class="nav-item"><%= link_to "投稿一覧", posts_path, class: "nav-link text-danger" %></li>
+            <li class="nav-item"><%= link_to "グループ一覧", groups_path, class: "nav-link text-danger" %></li>
+            <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link text-danger" %></li>
+          <% else %>
+            <li class="nav-item"><%= link_to "About", about_path, class: "nav-link text-danger" %></li>
+            <li class="nav-item"><%= link_to "投稿一覧", posts_path, class: "nav-link text-danger" %></li>
+            <li class="nav-item"><%= link_to "新規登録", new_user_registration_path, class: "nav-link text-danger" %></li>
+            <li class="nav-item"><%= link_to "ログイン", new_user_session_path, class: "nav-link text-danger" %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
-  <% end %>
-  <% if user_signed_in? %>
-    <%= form_with url: search_path, method: :get, local: true, class: "d-flex align-items-center" do |f| %>
-      <%= f.select :range, [["ユーザー", "users"], ["投稿", "posts"]], {}, class: "form-select me-2" %>
-      <%= f.select :match, [["完全一致", "exact"], ["前方一致", "forward"], ["後方一致", "backward"], ["部分一致", "partial"]], {}, class: "form-select me-2" %>
-      <%= f.text_field :word, placeholder: "キーワード検索", class: "form-control me-2" %>
-      <%= f.submit "検索", class: "btn btn-outline-primary" %>
-    <% end %>
-  <% end %>
-
-
-  <!-- 右側：ナビ -->
-  <nav class="d-flex align-items-center flex-nowrap">
-    <% if admin_signed_in? %>
-      <%= link_to "ユーザー管理", admin_users_path, class: "btn btn-light mx-1" %>
-      <%= link_to "投稿管理", admin_posts_path, class: "btn btn-light mx-1" %>
-      <%= link_to "コメント管理", admin_comments_path, class: "btn btn-light mx-1" %>
-      <%= link_to "グループ管理", admin_groups_path, class: "btn btn-light mx-1" %>
-      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-light mx-1" %>
-    <% elsif user_signed_in? %>
-      <%= link_to "マイページ", mypage_user_path(current_user), class: "btn btn-light mx-1" %>
-      <%= link_to "投稿一覧", posts_path, class: "btn btn-light mx-1" %>
-      <%= link_to "グループ一覧", groups_path, class: "btn btn-light mx-1" %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-light mx-1" %>
-    <% else %>
-      <%= link_to "About", about_path, class: "btn btn-light mx-1" %>
-      <%= link_to "投稿一覧", posts_path, class: "btn btn-light mx-1" %>
-      <%= link_to "新規登録", new_user_registration_path, class: "btn btn-light mx-1" %>
-      <%= link_to "ログイン", new_user_session_path, class: "btn btn-light mx-1" %>
-    <% end %>
-  </nav>
+  </div>
 </header>

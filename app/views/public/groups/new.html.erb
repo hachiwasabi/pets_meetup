@@ -1,17 +1,27 @@
-<div class="container my-4">
-  <h2 class="mb-3">グループ作成</h2>
+<div class="container my-5 px-sm-0">
+  <h1 class="mb-4 custom-orange text-center">グループ作成</h1>
 
-  <%= form_with model: @group, url: groups_path, local: true, class: "card p-4" do |f| %>
+  <%= form_with model: @group, url: groups_path, local: true do |f| %>
+    <% if @group.errors.any? %>
+      <div class="alert alert-danger">
+        <ul>
+          <% @group.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <div class="mb-3">
-      <%= f.label :name, "グループ名" %>
-      <%= f.text_field :name, class: "form-control" %>
+      <%= f.label :name, "グループ名", class:"form-label custom-orange fs-5 fw-bold" %>
+      <%= f.text_field :name, class: "form-control comment-textarea", placeholder: "例）集まれ！ワンちゃん大好き飼い主さん！"  %>
     </div>
 
     <div class="mb-3">
-      <%= f.label :description, "説明 / ルール" %>
-      <%= f.text_area :description, class: "form-control", rows: 4 %>
+      <%= f.label :description, "説明 / ルール", class:"form-label custom-orange fs-5 fw-bold" %>
+      <%= f.text_area :description, class: "form-control comment-textarea", rows: 4, placeholder: "例）ネコよりもウサギよりもハムスターよりも、何よりワンちゃん好きな方。是非ともグループに参加くださいませ！一緒にワンちゃんのお話しましょー！"  %>
     </div>
 
-    <%= f.submit "作成する", class: "btn btn-success" %>
+    <%= f.submit "作成する", class: "btn btn-lg bg-soft-orange mb-3" %>
   <% end %>
 </div>

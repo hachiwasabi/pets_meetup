@@ -69,3 +69,5 @@ gem "net-pop"
 gem "net-imap"
 
 gem "nokogiri", platforms: [:ruby]
+
+gem "kaminari"

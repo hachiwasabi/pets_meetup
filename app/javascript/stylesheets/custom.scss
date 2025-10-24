@@ -1,0 +1,218 @@
+// app/javascript/stylesheets/custom.scss
+.btn-white {
+  display: inline-block !important;
+  white-space: nowrap !important;
+  writing-mode: horizontal-tb !important;
+}
+
+.custom-color {
+  background-color: #F8F9FA;
+  padding: 0.5rem 1rem;
+}
+
+.bg-soft-orange {
+  background-color: #FFE5B4;
+  color: #e65100;  
+  transition: background-color 0.3s; 
+}
+
+.bg-soft-orange:hover {
+  background-color: #FFCC80; 
+  color: #bf360c; 
+}
+
+.bg-orange {
+  background-color: #FFE5B4;
+  color: #e65100;  
+  transition: background-color 0.3s; 
+}
+
+.btn-soft-blue {
+  background-color: #E3F2FD; /* 淡い水色 */
+  color: #1565C0;            /* 文字をやや濃いブルーに */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-soft-blue:hover {
+  background-color: #BBDEFB; /* 少し濃く */
+  color: #0D47A1;            /* 濃い青でホバー感 */
+}
+
+.custom-orange {
+  color: #e65100;
+  transition: background-color 0.3s;  
+}
+
+.custom-card {
+  background-color: #fff8e1; 
+  border: 3px solid #ffa726; 
+}
+
+.custom-card h5 a {
+  color: #e65100; 
+  text-decoration: none;
+}
+
+.custom-card h5 a:hover {
+  color: #ff9800; 
+  text-decoration: underline;
+}
+
+.custom-hr {
+  border: none;               
+  border-top: 3px solid #FFA726; 
+  margin: 0;            
+}
+
+.comment-textarea {
+  border: 2px solid #FFB74D;  
+  border-radius: 8px;         
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.comment-textarea:focus {
+  border-color: #FB8C00;      
+  box-shadow: 0 0 6px rgba(251, 140, 0, 0.4); 
+}
+
+.custom-orange th,
+tr.custom-orange th {
+  color: #e65100;
+}
+
+.group-link {
+  color: #e65100;  
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.group-link:hover {
+  color: #ff9800;
+  text-decoration: underline;
+}
+
+.custom-card .card-body {
+  padding: 1.25rem;
+  border-radius: 0.6rem;
+}
+
+.profile-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border: 4px solid rgba(255,165,38,0.15);
+}
+
+.profile-table th {
+  width: 38%;
+  vertical-align: top;
+  font-weight: 600;
+  color: #6b4a00;
+}
+
+.post-card {
+  border: 2px solid rgba(255,162,38,0.15);
+  background: transparent; /* 親の背景を活かす */
+}
+
+.post-thumb {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  border: 2px solid rgba(0,0,0,0.04);
+}
+
+.group-card {
+  border: 1px dashed rgba(255,162,38,0.2);
+  background: rgba(255,255,255,0.4);
+}
+
+@media (max-width: 767.98px) {
+  .profile-image {
+    width: 140px;
+    height: 140px;
+  }
+  .post-thumb {
+    width: 100px;
+    height: 100px;
+  }
+  .profile-table th {
+    width: 40%;
+  }
+}
+
+.custom-card a:focus {
+  outline: 3px solid rgba(255,152,0,0.25);
+  outline-offset: 2px;
+}
+
+.bg-soft-green  { background-color: #DFFFD6; }
+.bg-soft-pink   { background-color: #FFE4EC; }
+.bg-soft-blue   { background-color: #E3F2FD; }
+.bg-soft-green,
+.bg-soft-pink,
+.bg-soft-blue {
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+}
+
+.navbar-toggler {
+  border: none;
+  background: transparent;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.navbar-nav .nav-link {
+  font-weight: 500;
+  color: #2e2e2e;
+  transition: color 0.2s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+/* ハンバーガーメニュー展開時、最前面に表示する */
+#mainNavbar {
+  position: absolute; /* 通常のレイアウトフローから外す */
+  top: 80px; /* ヘッダーの高さに合わせて調整 */
+  right: 0;
+  width: 150px; /* 好みで調整。100%でもOK */
+  z-index: 9999; /* 最前面に */
+  background-color: #ffa726; /* bg-orange と同じ色 */
+  border-radius: 0 0 0 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* メニューが閉じているときに高さを戻す */
+.navbar-collapse.collapse:not(.show) {
+  position: static;
+}
+
+/* メニュー内のリンクの見た目調整 */
+#mainNavbar .nav-link {
+  color: #2e2e2e;
+  font-weight: 500;
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+
+#mainNavbar .nav-link:hover {
+  color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+

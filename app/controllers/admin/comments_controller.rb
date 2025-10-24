@@ -2,13 +2,10 @@ class Admin::CommentsController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_comment, only: [:destroy]
 
-  # 1. 一覧表示（ページネーションを入れる例もコメント）
   def index
-    # 全コメントを新しい順で取得。大量データならページネーションを導入してください (kaminari/will_paginate等)
-    @comments = Comment.includes(:user, :post).order(created_at: :desc).all
+    @comments = Comment.includes(:user, :post).order(created_at: :desc).page(params[:page])
   end
 
-  # 2. 管理者による削除（完全削除）
   def destroy
     @comment.destroy!
     redirect_to admin_comments_path, notice: "コメントを削除しました"

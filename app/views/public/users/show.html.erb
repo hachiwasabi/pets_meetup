@@ -20,6 +20,10 @@
         <td><%= @user.pet_name %></td>
       </tr>
       <tr>
+        <th>ペットの画像</th>
+        <td><%= image_tag @user.profile_image, size: "200x200", class: "img-fluid rounded my-2" %></td>
+      </tr>
+      <tr>
         <th>自己紹介</th>
         <td><%= @user.bio %></td>
       </tr>

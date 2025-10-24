@@ -11,6 +11,10 @@ ja:
       post:
         title: タイトル
         body: 本文
+        images: 投稿画像
+      group:
+        name: グループ名
+        description: 説明／ルール
   devise:
     failure:
       deleted_account: "このアカウントは退会済みです。"

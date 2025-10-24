@@ -1,25 +1,32 @@
-<h1 class="mb-4">新規投稿</h1>
+<div class="container my-5 px-sm-0">
+  <h1 class="mb-4 custom-orange text-center">新規投稿</h1>
 
-<%= form_with model: @post, local: true do |f| %>
-  <% if @post.errors.any? %>
-    <div class="alert alert-danger">
-      <ul>
-        <% @post.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+  <%= form_with model: @post, local: true do |f| %>
+    <% if @post.errors.any? %>
+      <div class="alert alert-danger">
+        <ul>
+          <% @post.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= f.label :title, "タイトル", class: "form-label custom-orange fs-5 fw-bold" %>
+      <%= f.text_field :title, class: "form-control comment-textarea", placeholder: "例）うちのネコが新しいおもちゃを気に入った話" %>
     </div>
+
+    <div class="mb-3">
+      <%= f.label :body, "本文", class: "form-label custom-orange fs-5 fw-bold" %>
+      <%= f.text_area :body, class: "form-control comment-textarea", rows: 5, placeholder: "本文を入力してください..." %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :images, "画像（1枚以上必須）", class: "form-label custom-orange fs-5 fw-bold" %>
+      <%= f.file_field :images, multiple: true, class: "form-control comment-textarea" %>
+    </div>
+
+    <%= f.submit "投稿する", class: "btn btn-lg bg-soft-orange mb-3" %>
   <% end %>
-
-  <div class="mb-3">
-    <%= f.label :title, "タイトル" %>
-    <%= f.text_field :title, class: "form-control" %>
-  </div>
-
-  <div class="mb-3">
-    <%= f.label :body, "本文" %>
-    <%= f.text_area :body, class: "form-control", rows: 5 %>
-  </div>
-
-  <%= f.submit "投稿する", class: "btn btn-success" %>
-<% end %>
+</div>
