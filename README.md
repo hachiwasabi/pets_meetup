@@ -30,6 +30,6 @@
 - IDE：Visual Studio Code（VSCode）
 ​
 ## 使用素材
-・Canva様（ロゴ）
-・Unsplash+様（aboutページ画像、プロフィール画像、投稿画像）
+・Canva様（ロゴ）https://www.canva.com/
+・Unsplash+様（aboutページ画像、プロフィール画像、投稿画像）https://unsplash.com/ja
 ・

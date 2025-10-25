@@ -19,7 +19,7 @@
         <h5><%= link_to post.title, post_path(post) %></h5>
         <% post.images.each do |image| %>
           <%= link_to post_path(post) do %>
-            <% image_tag image, size: "200x200", class: "img-fluid rounded my-2" %>
+            <% image_tag image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded my-2" %>
           <% end %>
         <% end %>
         <h6><%= truncate(post.body, length: 100) %></h6>
