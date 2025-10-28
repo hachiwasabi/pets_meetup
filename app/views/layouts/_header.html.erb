@@ -9,7 +9,7 @@
     <!-- 中央：挨拶・検索機能 -->
     <% unless controller_path.start_with?('admin/') %>
       <div class="d-none d-md-flex justify-content-center align-items-center flex-grow-1" style="height: 100%;">
-        <span class="welcome-text cutsom-orange">
+        <span class="welcome-text custom-orange">
           ようこそ、
           <% if admin_signed_in? %>
             管理者
@@ -53,6 +53,7 @@
             <li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link text-danger" %></li>
           <% elsif user_signed_in? %>
             <li class="nav-item"><%= link_to "マイページ", mypage_user_path(current_user), class: "nav-link text-danger" %></li>
+            <li class="nav-item"><%= link_to "ユーザー一覧", users_path, class: "nav-link text-danger" %></li>
             <li class="nav-item"><%= link_to "投稿一覧", posts_path, class: "nav-link text-danger" %></li>
             <li class="nav-item"><%= link_to "グループ一覧", groups_path, class: "nav-link text-danger" %></li>
             <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link text-danger" %></li>

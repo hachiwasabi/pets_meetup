@@ -1,5 +1,5 @@
 <div class="container my-5 px-sm-0">
-  <h1 class="mb-4 custom-orange text-center">グループ一覧</h1>
+  <h1 class="mb-4 custom-orange text-center">🐾 グループ一覧</h1>
 
   <%= link_to "グループを作成", new_group_path, class: "btn bg-soft-orange mb-3" %>
 
@@ -15,12 +15,15 @@
     <tbody>
       <% @groups.each do |group| %>
         <tr>
-          <td><%= link_to group.name, group_path(group) %></td>
+          <td>
+            <%= image_tag group.image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded-circle group-icon mb-3" %>
+            <%= link_to group.name, group_path(group) %>
+          </td>
           <td><%= group.owner.name %></td>
           <td><%= group.group_members.approved.count %>人</td>
           <td>
             <% unless group.owner_id == current_user.id || group.group_members.exists?(user_id: current_user.id) %>
-              <%= button_to "参加申請", join_request_group_path(group), method: :post, class: "btn btn-primary btn-sm" %>
+              <%= button_to "参加申請", join_request_group_path(group), method: :post, class: "btn bg-soft-orange btn-sm" %>
             <% else %>
               <span class="text-muted">申請済み / 参加中</span>
             <% end %>

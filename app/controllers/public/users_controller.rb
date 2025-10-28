@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user
+  before_action :set_user, only: [:mypage, :edit, :update, :withdraw, :show]
   before_action :ensure_correct_user, only: [:mypage, :edit, :update, :withdraw]
 
   def mypage
@@ -10,9 +10,15 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.order(created_at: :desc)
+    if @user == current_user
+      redirect_to mypage_user_path(@user) and return
+    end
   end
 
-  
+  def index
+    @users = User.where(is_active: true).order(:name)
+  end
+
   def edit
   end
 

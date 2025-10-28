@@ -1,9 +1,32 @@
 <div class="container my-5 px-sm-0">
-  <h1 class="mb-4 custom-orange"><%= @group.name %></h1>
-  <p class="text-muted">作成者: <%= @group.owner.name %>さん</p>
+  <div class="card mb-3 custom-card">
+    <div class="card-body">
+      <h2 class="custom-orange">🐰 <%= @group.name %></h2>
+      <hr class="custom-hr">
+      <p class="my-1 mt-3"><%= @group.description %><p>
 
-  <div class="card p-3 mb-4">
-    <p><%= @group.description %></p>
+      <!-- サムネイル画像 -->
+      <%= link_to "#", data: { bs_toggle: "modal", bs_target: "#groupImageModal" } do %>
+        <%= image_tag @group.image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded my-2" %>
+      <% end %>
+
+      <!-- モーダル本体 -->
+      <div class="modal fade" id="groupImageModal" tabindex="-1" aria-labelledby="groupImageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content bg-transparent border-0">
+            <div class="modal-body text-center p-0">
+              <%= image_tag @group.image, class: "img-fluid rounded" %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-muted">作成者: <%= @group.owner.name %>さん</p>
+      <% if user_signed_in? && @group.owner == current_user %>
+        <%= link_to "編集", edit_group_path(@group), class: "btn btn-outline-primary" %>
+        <%= link_to "削除", group_path(@group), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger" %>
+      <% end %>
+    </div>
   </div>
 
   <%# 参加申請ボタン（オーナー自身と既に申請/承認済みの場合は表示しない） %>
@@ -77,6 +100,5 @@
   <% else %>
     <p class="text-muted">※ グループ参加後にチャットが利用できます</p>
   <% end %>
-
 
 </div>

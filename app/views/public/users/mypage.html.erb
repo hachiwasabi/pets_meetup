@@ -1,17 +1,14 @@
 <div class="container my-5 px-sm-0">
-  <h1 class="mb-4 custom-orange text-center">マイページ</h1>
+  <h1 class="mb-4 custom-orange text-center">🐈 マイページ</h1>
 
   <div class="card mb-5 custom-card shadow-sm">
     <div class="card-body">
-      <h4 class="card-title mb-4">登録情報</h4>
+      <h4 class="card-title custom-orange mb-2">登録情報</h4>
+      <hr class="custom-hr">
 
       <div class="row align-items-center">
         <div class="col-md-2 text-center mb-3 mb-md-0">
-          <% if @user.profile_image&.attached? %>
-            <%= image_tag @user.profile_image, class: "img-fluid rounded profile-image shadow-sm", alt: "#{@user.name} のプロフィール画像" %>
-          <% else %>
-            <%= image_tag "placeholder-profile.png", class: "img-fluid rounded profile-image shadow-sm", alt: "プロフィール画像なし" %>
-          <% end %>
+          <%= image_tag @user.profile_image, class: "img-fluid rounded profile-image shadow-sm", alt: "#{@user.name} のプロフィール画像" %>
         </div>
 
         <div class="col-md-8">
@@ -54,7 +51,8 @@
   <!-- あなたの投稿一覧（カード風） -->
   <div class="card mb-5 custom-card shadow-sm">
     <div class="card-body">
-      <h4 class="card-title mb-3">あなたの投稿一覧</h4>
+      <h4 class="card-title custom-orange mb-2">あなたの投稿一覧</h4>
+      <hr class="custom-hr">
 
       <% if @posts.any? %>
         <div class="row">
@@ -98,7 +96,8 @@
   <!-- 参加中のグループ -->
   <div class="card mb-5 custom-card shadow-sm">
     <div class="card-body">
-      <h4 class="card-title mb-3">参加中のグループ</h4>
+      <h4 class="card-title custom-orange mb-2">参加中のグループ</h4>
+      <hr class="custom-hr">
 
       <% approved_groups = @user.group_members.approved.map(&:group) rescue [] %>
       <% if approved_groups.any? %>

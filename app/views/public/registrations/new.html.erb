@@ -1,103 +1,61 @@
-<div class='container W-100 my-3'>
-  <div class='row my-4 w-75'>
-    <div class="col-12">
-      <h1 class="table-light thead-color px-3 mb-2 fs-2 text-start d-inline-block">
-        新規会員登録
-      </h1>
+<div class="container my-5">
+  <div class="text-center mb-4">
+    <h1 class="fw-bold custom-orange">🐾 新規会員登録</h1>
+    <p class="text-muted">動物好きの仲間とつながろう！</p>
+  </div>
 
-      <br>
-      <%= render "public/shared/error_messages", resource: resource %>
+  <div class="card shadow-sm p-4 custom-card mx-auto" style="max-width: 750px;">
+    <%= render "public/shared/error_messages", resource: resource %>
 
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true }) do |f| %>
-
-        <div class="form-row my-3">
-          <div class="col-form-label col-md-4">
-            名前
-          </div>
-          <div class="col-md-4">
-            <div class="col-sm-8">
-              <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "犬田　猫郎" %>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-row mb-3">
-          <div class="col-form-label col-md-4">
-            メールアドレス
-          </div>
-          <div class="col-md-4">
-            <%= f.email_field :email, autocomplete: "email", class: "form-control", placeholder: "sample@example.com" %>
-          </div>
-        </div>
-
-        <div class="form-row mb-3">
-          <div class="col-form-label col-md-4">
-            プロフィール画像（必須）
-          </div>
-          <div class="col-md-8">
-            <%= f.file_field :profile_image, class: "form-control" %>
-          </div>
-        </div>
-
-
-        <div class="form-row mb-3">
-          <div class="col-form-label col-md-4">
-            ペットの種類／好きな動物
-          </div>
-          <div class="col-md-8">
-            <%= f.text_field :pet_type, class: "form-control", placeholder: "イヌ、ネコ、うさぎ" %>
-          </div>
-        </div>
-
-        <div class="form-row mb-3">
-          <div class="col-form-label col-md-4">
-            ペットの名前
-          </div>
-          <div class="col-md-4">
-            <%= f.text_field :pet_name, class: "form-control", placeholder: "ポチ（飼っていない場合は「無」" %>
-          </div>
-        </div>
-
-        <div class="form-row mb-4">
-          <div class="col-form-label col-md-4">
-            自己紹介文
-          </div>
-          <div class="col-md-8">
-            <%= f.text_field :bio, class: "form-control", placeholder: "昔から動物が好きで、最近念願の犬を飼い始めました！" %>
-          </div>
-        </div>
-
-        <div class="form-row mb-3">
-          <div class="col-form-label col-md-4">
-            パスワード(6文字以上)
-          </div>
-          <div class="col-md-4">
-            <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
-          </div>
-        </div>
-
-        <div class="form-row mb-3">
-          <div class="col-form-label col-md-4">
-            パスワード(確認用)
-          </div>
-          <div class="col-md-4">
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
-          </div>
-        </div>
-        <div class="mb-3 ml-3">
-          <div class="col-md-9 my-3 d-flex justify-content-center">
-            <%= f.submit "新規登録", class: "btn btn-success" %>
-          </div>
-        </div>
-      <% end %>
-      <h4 class="table-light thead-color px-3 mb-2 fs-6 text-start d-inline-block">既に登録済みの方</h4>
-      <div class="col-md-4 mt-4 ml-5">
-        <%= link_to "こちら", user_session_path %>からログインしてください。
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true }) do |f| %>
+      <div class="mb-3">
+        <%= f.label :name, "名前", class: "form-label fw-bold custom-orange" %>
+        <%= f.text_field :name, autofocus: true, class: "form-control comment-textarea", placeholder: "犬田　猫郎" %>
       </div>
-    </div>
+
+      <div class="mb-3">
+        <%= f.label :email, "メールアドレス", class: "form-label fw-bold custom-orange" %>
+        <%= f.email_field :email, autocomplete: "email", class: "form-control comment-textarea", placeholder: "sample@example.com" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :profile_image, "プロフィール画像（必須）", class: "form-label fw-bold custom-orange" %>
+        <%= f.file_field :profile_image, class: "form-control comment-textarea" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :pet_type, "ペットの種類／好きな動物", class: "form-label fw-bold custom-orange" %>
+        <%= f.text_field :pet_type, class: "form-control comment-textarea", placeholder: "イヌ、ネコ、うさぎ" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :pet_name, "ペットの名前", class: "form-label fw-bold custom-orange" %>
+        <%= f.text_field :pet_name, class: "form-control comment-textarea", placeholder: "ポチ（飼っていない場合は「無」）" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :bio, "自己紹介文", class: "form-label fw-bold custom-orange" %>
+        <%= f.text_area :bio, class: "form-control comment-textarea", rows: 3, placeholder: "昔から動物が好きで、最近念願の犬を飼い始めました！" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :password, "パスワード（6文字以上）", class: "form-label fw-bold custom-orange" %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control comment-textarea" %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :password_confirmation, "パスワード（確認用）", class: "form-label fw-bold custom-orange" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control comment-textarea" %>
+      </div>
+
+      <div class="text-center">
+        <%= f.submit "新規登録", class: "btn btn-lg bg-soft-orange fw-bold px-5" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="text-center mt-4">
+    <h5 class="custom-orange">既に登録済みの方</h5>
+    <p><%= link_to "こちら", user_session_path, class: "group-link fw-bold" %>からログインしてください。</p>
   </div>
 </div>
-
-
-
-

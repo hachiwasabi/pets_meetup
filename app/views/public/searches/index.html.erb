@@ -1,16 +1,73 @@
-<div class="container my-3 px-sm-0">
-  <h1 class="mb-4 custom-orange text-center">検索結果</h1>
+<div class="container my-5 px-sm-0">
+  <h1 class="mb-4 custom-orange text-center">🐍 検索結果</h1>
 
   <% if @results.present? %>
-    <% @results.each do |result| %>
-      <% if @range == "users" %>
-        <p><%= link_to result.name, user_path(result) %>さん</p>
-      <% else %>
-        <p><%= link_to result.title, post_path(result) %></p>
-      <% end %>
-    <% end %>
-  <% else %>
-    <p>該当する結果はありませんでした。</p>
-  <% end %>
+    <% if @range == "users" %>
+      <!-- ユーザー一覧風 -->
+      <div class="row">
+        <% @results.each do |user| %>
+          <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card custom-card shadow-sm text-center py-3 h-100">
+              <% if user.profile_image.attached? %>
+                <%= link_to user_path(user) do %>
+                  <%= image_tag user.profile_image.variant(resize_to_limit: [300, 300]).processed,
+                                class: "rounded-circle shadow-sm mb-3",
+                                style: "width: 120px; height: 120px; object-fit: cover;",
+                                alt: "#{user.name} のプロフィール画像" %>
+                <% end %>
+              <% else %>
+                <%= link_to user_path(user) do %>
+                  <%= image_tag "placeholder-profile.png",
+                                class: "rounded-circle shadow-sm mb-3",
+                                style: "width: 120px; height: 120px; object-fit: cover;",
+                                alt: "プロフィール画像なし" %>
+                <% end %>
+              <% end %>
 
+              <h5 class="fw-bold mb-1"><%= link_to user.name, user_path(user), class: "text-decoration-none custom-orange" %></h5>
+              <p class="text-muted mb-2"><%= user.pet_type.presence || "動物情報なし" %></p>
+              <p class="small text-secondary"><%= truncate(user.bio, length: 40) %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+    <% else %>
+      <!-- 投稿一覧風 -->
+      <div class="row">
+        <% @results.each do |post| %>
+          <div class="col-md-6 mb-4">
+            <div class="card custom-card mb-3">
+              <div class="card-body">
+                <h5>
+                  <%= link_to post.title, post_path(post), class: "text-decoration-none" %>
+                </h5>
+                <hr class="custom-hr">
+
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                  <% post.images.first(2).each do |image| %>
+                    <%= link_to post_path(post) do %>
+                      <%= image_tag image.variant(resize_to_limit: [300, 300]).processed, class: "img-fluid rounded shadow-sm", style: "width: 140px; height: 140px; object-fit: cover;" %>
+                    <% end %>
+                  <% end %>
+                </div>
+
+                <p class="card-text mb-2"><%= truncate(post.body, length: 100) %></p>
+                <p class="text-muted small mb-0">
+                  投稿者: <%= link_to post.user.name, user_path(post.user), class: "text-decoration-none" %>
+                  ｜ <%= l(post.created_at, format: :short) %>
+                </p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+  <% else %>
+    <div class="alert alert-warning text-center">
+      該当する結果はありませんでした。
+    </div>
+  <% end %>
 </div>
+

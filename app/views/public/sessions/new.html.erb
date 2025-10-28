@@ -1,42 +1,50 @@
-<div class='container W-100 my-3'>
-  <div class='row my-4 w-75'>
-    <div class="col-12">
-      <h1 class="table-light thead-color px-3 mb-2 fs-2 text-start d-inline-block">
-        ログイン
-      </h1>
-      
-      <br>
-      <%= flash[:alert] %>
+<div class="container my-5">
+  <div class="text-center mb-4">
+    <h1 class="fw-bold custom-orange">🐾 ログイン</h1>
+    <p class="text-muted">ようこそ！ログインしてペット仲間とつながろう</p>
+  </div>
 
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="form-row mb-3">
-          <div class="col-form-label col-md-4">
-            メールアドレス
-          </div>
-          <div class="col-md-4">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-          </div>
-        </div>
+  <div class="card shadow-sm p-4 custom-card mx-auto" style="max-width: 600px;">
+    <% if flash[:alert] %>
+      <div class="alert alert-danger text-center">
+        <%= flash[:alert] %>
+      </div>
+    <% elsif flash[:notice] && flash[:notice] != "ログアウトしました。" %>
+      <div class="alert alert-success text-center">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
 
-        <div class="form-row mb-3">
-          <div class="col-form-label col-md-4">
-            パスワード(6文字以上)
-          </div>
-          <div class="col-md-4">
-            <%= f.password_field :password, autocomplete: "current-password" %>
-          </div>
-        </div>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="mb-3">
+        <%= f.label :email, "メールアドレス", class: "form-label fw-bold custom-orange" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control comment-textarea", placeholder: "sample@example.com" %>
+      </div>
 
-        <% if devise_mapping.rememberable? %>
-          <div class="field">
-            <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
-          </div>
-        <% end %>
+      <div class="mb-3">
+        <%= f.label :password, "パスワード", class: "form-label fw-bold custom-orange" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control comment-textarea" %>
+      </div>
 
-        <div class="actions">
-          <%= f.submit "Log in" %>
+      <% if devise_mapping.rememberable? %>
+        <div class="form-check mb-3 custom-checkbox">
+          <%= f.check_box :remember_me, class: "form-check-input", id: "rememberCustom" %>
+          <%= f.label :remember_me, "ログイン状態を保持する", class: "form-check-label fw-bold" %>
         </div>
       <% end %>
 
-      <%= render "public/shared/links" %>
+      <div class="text-center">
+        <%= f.submit "ログイン", class: "btn btn-lg bg-soft-orange fw-bold px-5" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="text-center mt-4">
+    <p>まだ登録していない方は  
+      <%= link_to "こちら", new_user_registration_path, class: "group-link fw-bold" %>から新規登録できます。
+    </p>
+    <p>
+      <%= link_to "パスワードをお忘れですか？", new_user_password_path, class: "text-muted small" %>
+    </p>
+  </div>
+</div>

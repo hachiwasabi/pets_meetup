@@ -2,7 +2,12 @@
 
 <div class="card mb-4 p-3">
   <h3><%= @post.title %></h3>
-  <p><%= simple_format(h(@post.body)) %></p>
+  <% @post.images.each do |image| %>
+    <%= image_tag image.variant(resize_to_limit: [100, 100]).processed,
+          class: "shadow-sm",
+          style: "object-fit: cover; width: 100px; height: 100px;" %>
+  <% end %>
+  <p><%= @post.body %></p>
 
   <p class="text-muted">
     投稿者: <%= @post.user&.name || "ユーザー削除済み" %>（ID: <%= @post.user_id %>）<br>

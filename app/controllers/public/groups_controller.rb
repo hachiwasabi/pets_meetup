@@ -1,6 +1,6 @@
 class Public::GroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_group, only: [:show, :join_request, :approve, :reject]
+  before_action :set_group, only: [:show, :join_request, :approve, :reject, :edit, :update]
 
   def index
     @groups = Group.all
@@ -22,6 +22,23 @@ class Public::GroupsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def edit
+  end
+
+  def update
+    if @group.update(group_params)
+      redirect_to group_path(@group), notice: "グループ情報を更新しました"
+    else
+      flash.now[:alert] = "更新に失敗しました"
+      render :edit
+    end
+  end
+
+  def destroy
+    @group.destroy
+    redirect_to groups_path, alert:"グループを削除しました"
   end
 
   def join_request
@@ -50,6 +67,6 @@ class Public::GroupsController < ApplicationController
   end
 
   def group_params
-    params.require(:group).permit(:name, :description)
+    params.require(:group).permit(:name, :description, :image)
   end
 end

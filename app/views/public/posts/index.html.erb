@@ -1,5 +1,5 @@
 <div class="container my-5 px-sm-0">
-  <h1 class="mb-4 custom-orange text-center">みんなの投稿</h1>
+  <h1 class="mb-4 custom-orange text-center">🐢 みんなの投稿</h1>
 
   <% if user_signed_in? %>
     <div class="d-flex align-items-center mb-3">
@@ -17,6 +17,7 @@
     <div class="card mb-3 custom-card">
       <div class="card-body">
         <h5><%= link_to post.title, post_path(post) %></h5>
+        <hr class="custom-hr">
         <% post.images.each do |image| %>
           <%= link_to post_path(post) do %>
             <% image_tag image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded my-2" %>

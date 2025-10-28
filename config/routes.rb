@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resources :posts do
       resources :comments, only: [:create, :destroy]
     end
-    resources :users, only: [:edit, :update, :show] do
+    resources :users, only: [:edit, :update, :show, :index] do
       member do
         get :mypage
         patch :withdraw
