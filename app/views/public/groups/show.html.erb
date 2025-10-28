@@ -31,7 +31,7 @@
 
   <%# 参加申請ボタン（オーナー自身と既に申請/承認済みの場合は表示しない） %>
   <% unless @group.owner_id == current_user.id || @group.group_members.exists?(user_id: current_user.id) %>
-    <%= button_to "参加申請する", join_request_group_path(@group), method: :post, class: "btn bg-soft-orange" %>
+    <%= button_to "参加申請する", join_request_group_path(@group), method: :post, class: "btn bg-soft-orange btn-lg" %>
   <% end %>
 
   <%# オーナー向け：承認待ちリスト表示 %>
@@ -52,8 +52,10 @@
               <tr>
                 <td><%= member.user.name %>さん</td>
                 <td>
-                  <%= button_to "承認", approve_member_group_path(@group, member_id: member.id), method: :patch, class: "btn btn-success btn-sm" %>
-                  <%= button_to "拒否", reject_member_group_path(@group, member_id: member.id), method: :patch, class: "btn btn-danger btn-sm" %>
+                  <div class="d-flex gap-2">
+                    <%= button_to "承認", approve_member_group_path(@group, member_id: member.id), method: :patch, class: "btn btn-success btn-sm" %>
+                    <%= button_to "拒否", reject_member_group_path(@group, member_id: member.id), method: :patch, class: "btn btn-danger btn-sm" %>
+                  </div>
                 </td>
               </tr>
             <% end %>

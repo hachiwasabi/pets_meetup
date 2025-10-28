@@ -1,0 +1,39 @@
+<div class="container my-4">
+  <h1><%= @group.name %> の詳細</h1>
+  <%= image_tag @group.image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded my-2" %>
+  <p><strong>説明/ルール:</strong> <%= @group.description %></p>
+  <p><strong>作成者:</strong> <%= @group.owner.name %></p>
+  <p><strong>メンバー数:</strong> <%= @group.group_members.approved.count %>人</p>
+
+  <h3 class="mt-4">メンバー一覧</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>名前</th>
+        <th>ステータス</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @group_members.each do |gm| %>
+        <tr>
+          <td><%= gm.user.id %></td>
+          <td><%= gm.user.name %></td>
+          <td><%= gm.status %></td>
+          <td>
+            <%= button_to "脱退させる",
+                admin_group_remove_member_path(@group, gm),
+                method: :delete,
+                data: { confirm: "#{gm.user.name} をグループから削除しますか？" },
+                class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="mt-3">
+    <%= link_to "グループ一覧へ戻る", admin_groups_path, class: "btn btn-secondary" %>
+  </div>
+</div>

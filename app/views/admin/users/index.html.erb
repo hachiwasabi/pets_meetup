@@ -1,22 +1,25 @@
-<h2>ユーザー一覧</h2>
+<div class="container my-4">
+  <h1 class="mb-3">ユーザー一覧</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>名前</th>
-      <th>メール</th>
-      <th>詳細</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= user.id %></td>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to "詳細", admin_user_path(user), class: "btn btn-sm btn-primary" %></td>
+        <th>ID</th>
+        <th>名前</th>
+        <th>メール</th>
+        <th>詳細</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= link_to "詳細", admin_user_path(user), class: "btn btn-sm btn-primary" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>

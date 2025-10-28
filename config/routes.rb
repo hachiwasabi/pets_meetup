@@ -12,8 +12,10 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, only: [:index, :show, :destroy]
     resources :posts, only: [:index, :show, :destroy]
-    resources :groups, only: [:index, :destroy]
     resources :comments, only: [:index, :destroy]
+    resources :groups, only: [:index, :destroy, :show] do
+      delete 'remove_member/:member_id', to: 'group#remove_member', as: 'remove_member'
+    end
   end
 
   scope module: :public do

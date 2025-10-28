@@ -1,36 +1,38 @@
-<h1>投稿管理</h1>
-<p>全ての投稿一覧</p>
+<div class="container my-4">
+  <h1 class="mb-3">投稿管理</h1>
 
-<% if @posts.any? %>
-  <div class="list-group">
-    <% @posts.each do |post| %>
-      <div class="list-group-item mb-2">
-        <div class="d-flex justify-content-between align-items-start">
-          <div>
-            <strong><%= link_to truncate(post.title, length: 50), admin_post_path(post) %></strong>
-            <br>
-            <em>ユーザー:</em>
-            <%= post.user&.name || "ユーザー削除済み" %>
-            <small class="text-muted">（ID:<%= post.user_id %>）</small>
-            <br>
-            <span class="text-muted small">投稿日: <%= l(post.created_at, format: :short) %></span>
-          </div>
+  <% if @posts.any? %>
+    <div class="list-group">
+      <% @posts.each do |post| %>
+        <div class="list-group-item mb-2">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <strong><%= link_to post.title, admin_post_path(post) %></strong>
+              <br>
+              <em>ユーザー:</em>
+              <%= post.user&.name || "ユーザー削除済み" %>
+              <small class="text-muted">（ID:<%= post.user_id %>）</small>
+              <br>
+              <span class="text-muted small">投稿日: <%= l(post.created_at, format: :short) %></span>
+            </div>
 
-          <div class="text-end">
-            <%= form_with url: admin_post_path(post), method: :delete, local: true do |f| %>
-              <%= f.submit "削除", data: { confirm: "この投稿を完全に削除します。よろしいですか？" }, class: "btn btn-danger btn-sm" %>
-            <% end %>
+            <div class="text-end">
+              <%= form_with url: admin_post_path(post), method: :delete, local: true do |f| %>
+                <%= f.submit "削除", data: { confirm: "この投稿を完全に削除します。よろしいですか？" }, class: "btn btn-danger btn-sm" %>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+
+    <%= paginate @posts %>
+  <% else %>
+    <p>投稿はまだありません。</p>
+  <% end %>
+
+  <%= link_to "管理トップへ戻る", admin_users_path || admin_users_path, class: "btn btn-secondary mt-3" %>
 
   <%= paginate @posts %>
-<% else %>
-  <p>投稿はまだありません。</p>
-<% end %>
 
-<%= link_to "管理トップへ戻る", admin_users_path || admin_users_path, class: "btn btn-secondary mt-3" %>
-
-<%= paginate @posts %>
+</div>
