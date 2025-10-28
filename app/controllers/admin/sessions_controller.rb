@@ -7,6 +7,11 @@ class Admin::SessionsController < Devise::SessionsController
     admin_users_path 
   end
 
+  def destroy
+    super
+    flash.delete(:notice) 
+  end
+
   private
 
   def check_empty_fields
