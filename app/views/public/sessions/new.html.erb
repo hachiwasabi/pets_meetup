@@ -5,13 +5,10 @@
   </div>
 
   <div class="card shadow-sm p-4 custom-card mx-auto" style="max-width: 600px;">
-    <% if flash[:alert] %>
-      <div class="alert alert-danger text-center">
-        <%= flash[:alert] %>
-      </div>
-    <% elsif flash[:notice] && flash[:notice] != "ログアウトしました。" %>
-      <div class="alert alert-success text-center">
-        <%= flash[:notice] %>
+    <% flash.each do |type, message| %>
+      <% next if message.blank? %>
+      <div class="alert text-center <%= type == "alert" ? "alert-danger" : "alert-success" %>">
+        <%= message %>
       </div>
     <% end %>
 
@@ -40,8 +37,10 @@
   </div>
 
   <div class="text-center mt-4">
-    <p>まだ登録していない方は  
-      <%= link_to "こちら", new_user_registration_path, class: "group-link fw-bold" %>から新規登録できます。
+    <p>
+      まだ登録していない方は
+      <%= link_to "こちら", new_user_registration_path, class: "group-link fw-bold" %>
+      から新規登録できます。
     </p>
     <p>
       <%= link_to "パスワードをお忘れですか？", new_user_password_path, class: "text-muted small" %>

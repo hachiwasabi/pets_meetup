@@ -16,8 +16,9 @@ class Public::UsersController < ApplicationController
   end
 
   def index
-    @users = User.where(is_active: true).order(:name)
+    @users = User.where(is_active: true).order(:name).page(params[:page]).per(10)
   end
+
 
   def edit
   end
@@ -34,7 +35,6 @@ class Public::UsersController < ApplicationController
     @user = current_user
     @user.update(is_active: false)
     reset_session  
-    flash[:notice] = "退会が完了しました。ご利用ありがとうございました。"
     redirect_to new_user_registration_path
   end
 

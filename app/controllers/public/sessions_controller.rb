@@ -5,6 +5,16 @@
 class Public::SessionsController < Devise::SessionsController
   before_action :user_state, only: [:create]
 
+  def new
+    super
+    flash.clear
+  end
+
+  def destroy
+    super
+    flash.delete(:notice) 
+  end
+
   private
 
   def user_state

@@ -18,7 +18,7 @@
           <td><%= group.id %></td>
           <td><%= link_to group.name, admin_group_path(group) %></td>
           <td><%= group.owner.name %></td>
-          <td><%= group.group_members.approved.count %>人</td>
+          <td class="align-middle"><%= group.group_members.approved.joins(:user).where(users: { is_active: true }).count %>人</td>
           <td><%= group.created_at.strftime("%Y-%m-%d") %></td>
           <td>
             <%= button_to "削除", admin_group_path(group), method: :delete, 

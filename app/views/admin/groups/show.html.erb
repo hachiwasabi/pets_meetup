@@ -3,7 +3,7 @@
   <%= image_tag @group.image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded my-2" %>
   <p><strong>説明/ルール:</strong> <%= @group.description %></p>
   <p><strong>作成者:</strong> <%= @group.owner.name %></p>
-  <p><strong>メンバー数:</strong> <%= @group.group_members.approved.count %>人</p>
+  <p><strong>メンバー数:</strong> <%= @group.group_members.approved.joins(:user).where(users: { is_active: true }).count %>人</p>
 
   <h3 class="mt-4">メンバー一覧</h3>
   <table class="table table-striped">
@@ -11,16 +11,15 @@
       <tr>
         <th>ID</th>
         <th>名前</th>
-        <th>ステータス</th>
         <th>操作</th>
       </tr>
     </thead>
     <tbody>
-      <% @group_members.each do |gm| %>
+      <% @group_members.includes(:user).each do |gm| %>
+        <% next unless gm.user.is_active %>
         <tr>
           <td><%= gm.user.id %></td>
           <td><%= gm.user.name %></td>
-          <td><%= gm.status %></td>
           <td>
             <%= button_to "脱退させる",
                 admin_group_remove_member_path(@group, gm),

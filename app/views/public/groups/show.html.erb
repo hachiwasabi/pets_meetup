@@ -69,9 +69,10 @@
   <div class="mt-5">
     <hr class="custom-hr">
     <h4 class="mb-4 custom-orange">参加メンバー一覧</h4>
-    <% if @group.members.any? %>
+    <% active_members = @group.members.where(is_active: true) %>
+    <% if active_members.any? %>
       <ul class="list-group">
-        <% @group.members.each do |member| %>
+        <% active_members.each do |member| %>
           <li class="list-group-item"><%= member.name %>さん</li>
         <% end %>
       </ul>
