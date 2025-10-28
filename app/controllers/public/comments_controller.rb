@@ -3,15 +3,12 @@ class Public::CommentsController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-
     if @post.user_id == current_user.id
       redirect_to post_path(@post), alert: "自分の投稿にはコメントできません"
       return
     end
-
     @comment = @post.comments.new(comment_params)
     @comment.user = current_user
-
     if @comment.save
       redirect_to post_path(@post), notice: "コメントを投稿しました"
     else

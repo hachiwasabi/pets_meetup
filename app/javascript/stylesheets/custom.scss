@@ -1,25 +1,10 @@
 // app/javascript/stylesheets/custom.scss
-.btn-white {
-  display: inline-block !important;
-  white-space: nowrap !important;
-  writing-mode: horizontal-tb !important;
-}
-
-.custom-color {
-  background-color: #F8F9FA;
-  padding: 0.5rem 1rem;
-}
 
 .bg-soft-orange {
   background-color: #FFE5B4;
   color: #e65100;  
   transition: background-color 0.3s; 
 }
-
-//.bg-soft-orange:hover {
-//  background-color: #FFCC80; 
-//  color: #bf360c; 
-//}
 
 .bg-orange {
   background-color: #FFE5B4;
@@ -28,14 +13,14 @@
 }
 
 .btn-soft-blue {
-  background-color: #E3F2FD; /* 淡い水色 */
-  color: #1565C0;            /* 文字をやや濃いブルーに */
+  background-color: #E3F2FD; 
+  color: #1565C0;            
   transition: background-color 0.3s, color 0.3s;
 }
 
 .btn-soft-blue:hover {
-  background-color: #BBDEFB; /* 少し濃く */
-  color: #0D47A1;            /* 濃い青でホバー感 */
+  background-color: #BBDEFB; 
+  color: #0D47A1;            
 }
 
 .custom-orange {
@@ -112,7 +97,7 @@ tr.custom-orange th {
 
 .post-card {
   border: 2px solid rgba(255,162,38,0.15);
-  background: transparent; /* 親の背景を活かす */
+  background: transparent; 
 }
 
 .post-thumb {
@@ -176,24 +161,21 @@ tr.custom-orange th {
   color: #ffffff;
 }
 
-/* ハンバーガーメニュー展開時、最前面に表示する */
 #mainNavbar {
-  position: absolute; /* 通常のレイアウトフローから外す */
-  top: 80px; /* ヘッダーの高さに合わせて調整 */
+  position: absolute; 
+  top: 80px; 
   right: 0;
-  width: 150px; /* 好みで調整。100%でもOK */
-  z-index: 9999; /* 最前面に */
-  background-color: #ffa726; /* bg-orange と同じ色 */
+  width: 150px; 
+  z-index: 9999; 
+  background-color: #ffa726; 
   border-radius: 0 0 0 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* メニューが閉じているときに高さを戻す */
 .navbar-collapse.collapse:not(.show) {
   position: static;
 }
 
-/* メニュー内のリンクの見た目調整 */
 #mainNavbar .nav-link {
   color: #2e2e2e;
   font-weight: 500;
@@ -221,14 +203,13 @@ tr.custom-orange th {
 }
 
 .welcome-text {
-  font-size: 1.4rem;         /* 通常より大きめに */
-  font-weight: 500;          /* 少し太字で柔らかく */
-  color: #e65100;            /* custom-orange と統一 */
-  letter-spacing: 0.02em;    /* 少し余白を加えて読みやすく */
-  font-family: "Kosugi Maru", "Hiragino Maru Gothic ProN", sans-serif; /* 丸みのある日本語フォント */
+  font-size: 1.4rem;         
+  font-weight: 500;          
+  color: #e65100;           
+  letter-spacing: 0.02em;   
+  font-family: "Kosugi Maru", "Hiragino Maru Gothic ProN", sans-serif; 
 }
 
-/* 小さい画面では少し小さめに調整 */
 @media (max-width: 767.98px) {
   .welcome-text {
     font-size: 1.1rem;
@@ -236,10 +217,10 @@ tr.custom-orange th {
 }
 
 .group-icon {
-  width: 80px;   // 小さめの丸アイコン
+  width: 80px;  
   height: 80px;
   object-fit: cover; 
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15); // 小さめ影
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15); 
 }
 
 

@@ -4,7 +4,7 @@ class Public::UsersController < ApplicationController
   before_action :ensure_correct_user, only: [:mypage, :edit, :update, :withdraw]
 
   def mypage
-    @posts = @user.posts.order(created_at: :desc)
+    @posts = @user.posts.order(created_at: :desc).page(params[:page])
   end
 
   def show

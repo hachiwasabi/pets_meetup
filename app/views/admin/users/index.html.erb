@@ -7,19 +7,28 @@
         <th>ID</th>
         <th>名前</th>
         <th>メール</th>
-        <th>詳細</th>
+        <th>ステータス</th>
       </tr>
     </thead>
     <tbody>
       <% @users.each do |user| %>
         <tr>
           <td><%= user.id %></td>
-          <td><%= user.name %></td>
+          <td><%=link_to user.name, admin_user_path(user) %></td>
           <td><%= user.email %></td>
-          <td><%= link_to "詳細", admin_user_path(user), class: "btn btn-sm btn-primary" %></td>
+          <td>
+            <% if user.is_active %>
+              <span class="text-success">会員</span>
+            <% else %>
+              <span class="text-muted">退会済み</span>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
+</div>
 
+<div class="mt-3">
+  <%= paginate @users %>
 </div>

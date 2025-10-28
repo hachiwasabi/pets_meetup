@@ -1,17 +1,26 @@
 class Admin::UsersController < ApplicationController
- before_action :authenticate_admin!  # Deviseの管理者認証
+ before_action :authenticate_admin!
+ before_action :set_user, only: [:show, :withdraw, :update]
 
   def index
-    @users = User.all
+    @users = User.all.page(params[:page])
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
-  def destroy
+  def withdraw
+    if @user.update(is_active: false)
+      flash[:notice] = "退会処理を行いました。"
+    else
+      flash[:alert] = "退会処理に失敗しました。"
+    end
+    redirect_to admin_users_path
+  end
+
+  private
+
+  def set_user
     @user = User.find(params[:id])
-    @user.destroy
-    redirect_to admin_users_path, notice: "ユーザーを退会させました"
   end
 end

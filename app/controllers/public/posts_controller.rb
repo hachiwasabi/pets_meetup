@@ -4,10 +4,13 @@ class Public::PostsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.by_active_users.order(created_at: :desc).page(params[:page])
   end
 
   def show
+  end
+
+  def edit
   end
 
   def new
@@ -21,9 +24,6 @@ class Public::PostsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def edit
   end
 
   def update

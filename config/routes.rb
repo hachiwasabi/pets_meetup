@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    resources :users, only: [:index, :show, :destroy]
+    resources :users, only: [:index, :show] do
+      patch :withdraw, on: :member
+    end
     resources :posts, only: [:index, :show, :destroy]
     resources :comments, only: [:index, :destroy]
     resources :groups, only: [:index, :destroy, :show] do

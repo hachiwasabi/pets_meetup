@@ -6,6 +6,8 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { maximum: 50 }
   validates :body, presence: true, length: { maximum: 500 }
   validates :images, presence: true
+
+  scope :by_active_users, -> { joins(:user).merge(User.active) }
   
   def self.search_by(word, match)
     case match

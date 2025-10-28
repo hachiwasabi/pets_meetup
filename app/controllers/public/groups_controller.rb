@@ -3,7 +3,7 @@ class Public::GroupsController < ApplicationController
   before_action :set_group, only: [:show, :join_request, :approve, :reject, :edit, :update]
 
   def index
-    @groups = Group.all
+    @groups = Group.all.page(params[:page])
   end
 
   def show

@@ -15,6 +15,7 @@ class Public::SessionsController < Devise::SessionsController
         redirect_to new_user_session_path, alert: "このアカウントは退会済みです。"
     end 
   end
+  
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

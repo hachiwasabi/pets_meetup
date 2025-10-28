@@ -63,3 +63,9 @@ post3 = Post.find_or_create_by!(title: "甘えん坊", user: satou) do |post|
   post.body = "寂しがり屋で横で良くゴロンとしています。触らせてくれる時とそうじゃないときがあるので、そこは時の運です。"
   post.images.attach([  { io: File.open(Rails.root.join("app/assets/images/rabbit_post.jpg")), filename: "rabbit_post.jpg" } ])
 end
+
+user1 = User.find(2)
+group1 = Group.find_or_create_by!(name: "わんにゃん同好会", owner_id: user1.id) do |group|
+  group.description = "イヌネコ大好きな皆様！集まってワイワイしましょうー！"
+  group.image.attach( io: File.open(Rails.root.join("app/assets/images/dogcat_group.jpg")), filename: "dogcat_group.jpg")
+end

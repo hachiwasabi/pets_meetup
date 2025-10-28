@@ -3,7 +3,7 @@ class Admin::GroupsController < ApplicationController
   before_action :set_group, only: [:show, :destroy, :remove_member]
 
   def index
-    @groups = Group.all.includes(:owner)
+    @groups = Group.all.includes(:owner).page(params[:page])
   end
 
   def show
