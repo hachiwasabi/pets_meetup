@@ -10,13 +10,20 @@ class Admin::UsersController < ApplicationController
   end
 
   def withdraw
-    if @user.update(is_active: false)
-      flash[:notice] = "退会処理を行いました。"
-    else
-      flash[:alert] = "退会処理に失敗しました。"
+    ActiveRecord::Base.transaction do
+      @user.owned_groups.destroy_all
+      if @user.update(is_active: false)
+        flash[:notice] = "退会処理を行いました。"
+      else
+        raise ActiveRecord::Rollback, "ユーザーの退会更新に失敗しました。"
+      end
     end
     redirect_to admin_users_path
+    rescue => e
+      flash[:alert] = "退会処理に失敗しました。"
+      redirect_to admin_users_path
   end
+
 
   private
 

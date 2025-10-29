@@ -33,7 +33,10 @@ class Public::UsersController < ApplicationController
 
   def withdraw
     @user = current_user
-    @user.update(is_active: false)
+    @user.transaction do
+      @user.owned_groups.destroy_all
+      @user.update(is_active: false)
+    end
     reset_session  
     redirect_to new_user_registration_path
   end
