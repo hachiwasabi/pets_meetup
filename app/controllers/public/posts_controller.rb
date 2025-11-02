@@ -19,6 +19,7 @@ class Public::PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
+    @post.score = Language.get_data(post_params[:body])
     if @post.save
       redirect_to posts_path, notice: "投稿が完了しました！"
     else
