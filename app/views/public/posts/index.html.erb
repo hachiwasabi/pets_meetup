@@ -23,6 +23,10 @@
             <% image_tag image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded my-2" %>
           <% end %>
         <% end %>
+        <br>
+        <% post.tags.each do |tag| %>
+          <span class="label"><%= tag.name %></span>
+        <% end %>
         <h6><%= truncate(post.body, length: 100) %></h6>
         <span class="sentiment-score">本文の感情分析スコア <%= post.score %></span><br>
         <small class="text-muted">

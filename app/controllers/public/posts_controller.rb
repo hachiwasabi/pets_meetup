@@ -19,8 +19,16 @@ class Public::PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
+    if post_params[:images].present?
+      tags = Vision.get_image_data(post_params[:images].first)
+    else
+      tags = []
+    end
     @post.score = Language.get_data(post_params[:body])
     if @post.save
+      tags.each do |tag|
+        @post.tags.create(name: tag)
+      end
       redirect_to posts_path, notice: "投稿が完了しました！"
     else
       render :new
