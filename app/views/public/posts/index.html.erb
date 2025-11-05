@@ -27,6 +27,7 @@
         <% post.tags.each do |tag| %>
           <span class="label"><%= tag.name %></span>
         <% end %>
+        <br>
         <h6><%= truncate(post.body, length: 100) %></h6>
         <span class="sentiment-score">本文の感情分析スコア <%= post.score %></span><br>
         <small class="text-muted">
