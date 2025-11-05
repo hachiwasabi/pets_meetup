@@ -28,8 +28,9 @@
           <span class="label"><%= tag.name %></span>
         <% end %>
         <br>
+        <span class="sentiment-score">本文の感情分析スコア <%= post.score %></span>
+        <br><br>
         <h6><%= truncate(post.body, length: 100) %></h6>
-        <span class="sentiment-score">本文の感情分析スコア <%= post.score %></span><br>
         <small class="text-muted">
           投稿者: <%= post.user.name %>さん | <%= l(post.created_at, format: :short) %>
         </small>
