@@ -1,15 +1,17 @@
-<div class="container my-5">
-
-  <!-- Hero Section -->
-  <div class="text-center mb-5 py-5 bg-orange rounded-4 shadow-sm">
+<!-- Hero Section -->
+<div class="hero-section text-center text-white d-flex align-items-center justify-content-center">
+  <div class="hero-content py-5">
     <h1 class="fw-bold mb-3 custom-orange">🐶 動物好きが集まるコミュニティ 🐱</h1>
-    <p class="lead text-muted mb-4">ペットの写真を共有したり、同じ趣味の仲間と話そう。</p>
+    <p class="lead text-muted mb-4 fw-bold">ペットの写真を共有したり、同じ趣味の仲間と話そう。</p>
     <% if user_signed_in? %>
       <%= link_to "🐾 新しい投稿を作成する", new_post_path, class: "btn btn-soft-blue btn-lg" %>
     <% else %>
       <%= link_to "新規登録して参加する", new_user_registration_path, class: "btn btn-soft-blue btn-lg" %>
     <% end %>
   </div>
+</div>
+
+<div class="container my-5">
 
   <hr class="custom-hr mb-5">
 
@@ -17,19 +19,15 @@
   <section class="mb-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h2 class="fw-bold custom-orange">🐇 新着投稿</h2>
-      <%= link_to "もっと見る", posts_path, class: "btn btn-soft-blue" %>
+      <%= link_to "もっと見る", posts_path, class: "btn btn-soft-blue btn-lg" %>
     </div>
 
     <div class="row g-4">
       <% @posts.first(4).each do |post| %>
         <div class="col-md-6 col-lg-3">
           <div class="card post-card shadow-sm h-100">
-            <% if post.images.attached? %>
-              <%= link_to post_path(post) do %>
-                <%= image_tag post.images.first.variant(resize_to_limit: [400, 400]).processed, class: "card-img-top rounded-top" %>
-              <% end %>
-            <% else %>
-              <div class="bg-soft-orange text-center py-5 rounded-top">No Image</div>
+            <%= link_to post_path(post) do %>
+              <%= image_tag post.images.first.variant(resize_to_limit: [400, 400]).processed, class: "card-img-top rounded-top" %>
             <% end %>
             <div class="card-body">
               <h5 class="card-title text-truncate mb-2">
@@ -60,7 +58,7 @@
   <section>
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h2 class="fw-bold custom-orange">🐕‍🦺 新着グループ</h2>
-      <%= link_to "もっと見る", groups_path, class: "btn btn-soft-blue" %>
+      <%= link_to "もっと見る", groups_path, class: "btn btn-soft-blue btn-lg" %>
     </div>
 
     <div class="row g-4">
@@ -70,6 +68,7 @@
             <div class="card-body">
               <h5 class="card-title mb-2">
                 <%= link_to group.name, group_path(group), class: "group-link" %>
+                <%= image_tag group.image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded-circle group-icon mb-3" %>
               </h5>
               <p class="card-text text-muted small mb-3">
                 <%= truncate(group.description, length: 80) %>

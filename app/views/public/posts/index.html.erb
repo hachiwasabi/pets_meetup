@@ -7,10 +7,10 @@
       <%= link_to "新規投稿", new_post_path, class: "btn btn-lg bg-soft-orange mb-3" %>
     </div>
   <% else %>
-    <p class="text-muted">
+    <h6 class="text-muted">
       ※ 投稿するには <%= link_to "ログイン", new_user_session_path %> または
       <%= link_to "新規登録", new_user_registration_path %> が必要です。
-    </p>
+    </h6>
   <% end %>
 
   <% @posts.each do |post| %>
