@@ -11,10 +11,10 @@
                             class: "img-fluid rounded-circle mb-2 profile-image" %>
             <% end %>
             
-            <h5 class="fw-bold mb-1">
-              <%= link_to user.name, user_path(user), class: "group-link" %>
+            <h5 class="fw-bold mb-1 custom-orange">
+              <%= link_to user.name, user_path(user), class: "group-link" %>さん
             </h5>
-            <p class="text-muted small mb-0"><%= user.pet_type %>：<%= user.pet_name %></p>
+            <p class="text-muted small mb-0"><%= user.pet_type %>：<%= user.pet_name %>ちゃん</p>
           </div>
         </div>
       <% end %>

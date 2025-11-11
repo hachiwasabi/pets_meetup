@@ -6,6 +6,12 @@
   transition: background-color 0.3s; 
 }
 
+.bg-soft-orange:hover {
+  background-color: #fcdb9a;
+  color: #cb5718;
+  opacity: 1 !important;
+}
+
 .bg-orange {
   background-color: #FFE5B4;
   color: #e65100;  
@@ -130,16 +136,6 @@ tr.custom-orange th {
 .custom-card a:focus {
   outline: 3px solid rgba(255,152,0,0.25);
   outline-offset: 2px;
-}
-
-.bg-soft-green  { background-color: #DFFFD6; }
-.bg-soft-pink   { background-color: #FFE4EC; }
-.bg-soft-blue   { background-color: #E3F2FD; }
-.bg-soft-green,
-.bg-soft-pink,
-.bg-soft-blue {
-  border-radius: 6px;
-  padding: 0.4rem 0.8rem;
 }
 
 .navbar-toggler {

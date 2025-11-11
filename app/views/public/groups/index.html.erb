@@ -16,10 +16,12 @@
       <% @groups.each do |group| %>
         <tr>
           <td class="align-middle">
-            <%= image_tag group.image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded-circle group-icon mb-3" %>
+            <%= link_to group_path(group) do %>
+              <%= image_tag group.image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded-circle group-icon mb-3" %>
+            <% end %>
             <%= link_to group.name, group_path(group) %>
           </td>
-          <td class="align-middle"><%= group.owner.name %></td>
+          <td class="align-middle"><%= group.owner.name %>さん</td>
           <td class="align-middle"><%= group.group_members.approved.joins(:user).where(users: { is_active: true }).count %>人</td>
           <td class="align-middle">
             <% unless group.owner_id == current_user.id || group.group_members.exists?(user_id: current_user.id) %>

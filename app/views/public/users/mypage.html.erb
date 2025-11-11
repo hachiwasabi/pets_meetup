@@ -16,7 +16,7 @@
             <tbody>
               <tr>
                 <th scope="row">名前</th>
-                <td><%= @user.name %></td>
+                <td><%= @user.name %>さん</td>
               </tr>
               <tr>
                 <th scope="row">メールアドレス</th>
@@ -28,7 +28,7 @@
               </tr>
               <tr>
                 <th scope="row">ペットの名前</th>
-                <td><%= @user.pet_name %></td>
+                <td><%= @user.pet_name %>ちゃん</td>
               </tr>
               <tr>
                 <th scope="row">自己紹介</th>
@@ -78,7 +78,7 @@
 
                   <div class="d-flex justify-content-between align-items-center">
                     <small class="text-muted">
-                      投稿者: <%= post.user.name %> | <%= l(post.created_at, format: :short) %>
+                      投稿者: <%= post.user.name %>さん | <%= l(post.created_at, format: :short) %>
                     </small>
                     <%= link_to "詳しく見る", post_path(post), class: "btn btn-sm btn-outline-primary" %>
                   </div>
