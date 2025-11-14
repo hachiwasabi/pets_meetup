@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     get "search", to: "searches#index", as: "search"
     resources :posts do
       resources :comments, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy]
     end
     resources :users, only: [:edit, :update, :show, :index] do
       member do

@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many_attached :images
   has_many :tags, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :body, presence: true, length: { maximum: 500 }
@@ -21,6 +23,11 @@ class Post < ApplicationRecord
     else
       where("title LIKE ?", "%#{word}%")
     end
+  end
+
+  def favorited_by?(user)
+    return false if user.nil?
+    favorites.exists?(user_id: user.id)
   end
 
 end
