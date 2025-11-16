@@ -36,7 +36,6 @@
               <p class="card-text text-muted small mb-3">
                 <%= truncate(post.body, length: 60) %>
               </p>
-              <span class="sentiment-score">本文の感情分析スコア <%= post.score %></span><br>
               <div class="d-flex justify-content-between align-items-center">
                 <small class="text-muted">
                   投稿者： <%= post.user.name if post.user %>さん
