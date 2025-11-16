@@ -13,6 +13,8 @@ class Public::UsersController < ApplicationController
     if @user == current_user
       redirect_to mypage_user_path(@user) and return
     end
+    @following_users = @user.following_users
+    @follower_users = @user.follower_users
   end
 
   def index
@@ -39,6 +41,16 @@ class Public::UsersController < ApplicationController
     end
     reset_session  
     redirect_to new_user_registration_path
+  end
+
+  def follows
+    user = User.find(params[:id])
+    @user = user.following_users
+  end
+
+  def followers
+    user = User.find(params[:id])
+    @user = user.follower_users
   end
 
 

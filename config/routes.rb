@@ -22,16 +22,20 @@ Rails.application.routes.draw do
 
   scope module: :public do
     get "search", to: "searches#index", as: "search"
+
     resources :posts do
       resources :comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
+
     resources :users, only: [:edit, :update, :show, :index] do
       member do
-        get :mypage
+        get :mypage, :follows, :followers
         patch :withdraw
       end
+      resource :relationships, only: [:create, :destroy]
     end
+    
     resources :groups do
       member do
         post 'join_request'
