@@ -1,0 +1,15 @@
+<% if user_signed_in? %>
+  <% if @post.user_id != current_user.id %>
+    <h3 class="custom-orange">コメントを書く</h3>
+    <%= form_with model: [@post, Comment.new], local: false, data: {"turbolinks" => false}  do |f| %>
+      <div class="mb-3 col-md-8">
+        <%= f.text_area :content, rows: 3, class: "form-control comment-textarea", placeholder: "コメントを入力..." %>
+      </div>
+      <%= f.submit "コメントする", class: "btn bg-soft-orange mb-3" %>
+    <% end %>
+  <% else %>
+    <p class="text-muted">※自分の投稿にはコメントできません</p>
+  <% end %>
+<% else %>
+  <p>※ コメントするには <%= link_to "ログイン", new_user_session_path %> が必要です。</p>
+<% end %>
