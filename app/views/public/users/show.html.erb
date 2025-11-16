@@ -6,15 +6,13 @@
     <div class="card-body">
       <h4 class="card-title custom-orange mb-2">登録情報</h4>
       <hr class="custom-hr">
-
       <div class="row align-items-center">
         <div class="col-md-2 text-center mb-3 mb-md-0">
         <%= image_tag @user.profile_image.variant(resize_to_limit: [120,120]).processed,
                       class: "img-fluid rounded profile-image shadow-sm",
                       alt: "#{@user.name} のプロフィール画像" %>
         </div>
-
-        <div class="col-md-10">
+        <div class="col-md-6">
           <table class="table table-borderless mb-0 profile-table">
             <tbody>
               <tr>
@@ -33,17 +31,23 @@
                 <th scope="row">自己紹介</th>
                 <td><%= simple_format(@user.bio) %></td>
               </tr>
+              <tr>
+                <th scope="row">フォロー数</th>
+                <td><%= @user.followers.count %></td>
+              </tr>
+              <tr>
+                <th scope="row">フォロワー数</th>
+                <td><%= @user.followeds.count %></td>
+              </tr>
+              <td>
+                <% if current_user.following?(@user) %>
+                  <%= link_to "フォローを外す", user_relationships_path(@user.id), method: :delete, class: "btn btn-danger" %>
+                <% else %>
+                  <%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class: "btn btn-success" %>
+                <% end %>
+              </td>
             </tbody>
           </table>
-
-          <% if @user == current_user %>
-            <div class="d-flex justify-content-between mt-4">
-              <%= link_to "プロフィールを編集", edit_user_path(@user), class: "btn btn-primary" %>
-              <%= button_to "退会する", withdraw_user_path(@user), method: :patch,
-                    data: { confirm: "本当に退会しますか？" },
-                    class: "btn btn-danger" %>
-            </div>
-          <% end %>
         </div>
       </div>
     </div>
@@ -98,13 +102,15 @@
       <% if approved_groups.any? %>
         <div class="row g-4">
           <% approved_groups.each do |group| %>
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-3">
               <div class="card group-card shadow-sm h-100">
-                <div class="card-body d-flex justify-content-between align-items-center">
-                  <%= link_to group.name, group_path(group), class: "stretched-link fw-semibold" %>
-                  <% if @user == current_user %>
-                    <span class="badge bg-primary">参加中</span>
-                  <% end %>
+                <div class="card-body">
+                  <h5 class="card-title mb-2">
+                    <%= link_to group.name, group_path(group), class: "stretched-link fw-semibold" %>
+                    <%= link_to group_path(group) do %>
+                      <%= image_tag group.image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded-circle group-icon mb-3" %>
+                    <% end %>
+                  </h5>
                 </div>
               </div>
             </div>
