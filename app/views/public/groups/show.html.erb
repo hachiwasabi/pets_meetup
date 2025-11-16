@@ -1,5 +1,5 @@
 <div class="container my-5 px-sm-0">
-  <div class="card mb-3 custom-card">
+  <div class="card mb-3 custom-card col-md-8">
     <div class="card-body">
       <h2 class="custom-orange">🐰 <%= @group.name %></h2>
       <hr class="custom-hr">
@@ -36,7 +36,7 @@
 
   <%# オーナー向け：承認待ちリスト表示 %>
   <% if @group.owner_id == current_user.id %>
-    <div class="mt-4">
+    <div class="mb-4">
       <hr class="custom-hr">
       <h4 class="mb-4 custom-orange">申請中のメンバー</h4>
       <% if @pending_members.any? %>
@@ -66,8 +66,8 @@
       <% end %>
     </div>
   <% end %>
-  <div class="mt-5">
-    <hr class="custom-hr">
+  <hr class="custom-hr">
+  <div class="mb-4 col-md-2">
     <h4 class="mb-4 custom-orange">参加メンバー一覧</h4>
     <% active_members = @group.members.where(is_active: true) %>
     <% if active_members.any? %>

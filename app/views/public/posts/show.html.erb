@@ -1,5 +1,5 @@
 <div class="container my-5 px-sm-0">
-  <div class="card mb-3 custom-card">
+  <div class="card mb-3 custom-card col-md-8">
     <div class="card-body">
       <h2 class="custom-orange">🦉 <%= @post.title %></h2>
       <hr class="custom-hr">
@@ -41,27 +41,26 @@
     </div>
   </div>
 
-  <h3 class="mb-4 custom-orange">コメント一覧</h3>
   <hr class="custom-hr">
-  <div class="mb-4">
+  <h3 class="mb-4 custom-orange">コメント一覧</h3>
+  <div class="card col-md-8 mb-3 custom-card">
     <% @post.comments.each do |comment| %>
       <div class="p-2 mb-2">
         <strong><%= comment.user.name %>さん</strong>：
         <%= comment.content %>
-        
         <% if user_signed_in? && comment.user_id == current_user.id %>
           <%= link_to "削除", post_comment_path(@post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger ms-2" %>
         <% end %>
-        <hr class="custom-hr">
       </div>
     <% end %>
   </div>
+  <hr class="custom-hr">
 
   <% if user_signed_in? %>
     <% if @post.user_id != current_user.id %>
-      <h6 class="custom-orange">コメントを書く</h6>
+      <h3 class="custom-orange">コメントを書く</h3>
       <%= form_with model: [@post, Comment.new], local: true do |f| %>
-        <div class="mb-3">
+        <div class="mb-3 col-md-8">
           <%= f.text_area :content, rows: 3, class: "form-control comment-textarea", placeholder: "コメントを入力..." %>
         </div>
         <%= f.submit "コメントする", class: "btn bg-soft-orange mb-3" %>

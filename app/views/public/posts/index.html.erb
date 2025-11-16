@@ -14,7 +14,7 @@
   <% end %>
 
   <% @posts.each do |post| %>
-    <div class="card mb-3 custom-card">
+    <div class="card mb-3 custom-card col-md-10">
       <div class="card-body">
         <h5><%= link_to post.title, post_path(post) %></h5>
         <hr class="custom-hr">
