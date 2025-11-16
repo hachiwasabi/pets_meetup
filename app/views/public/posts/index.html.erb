@@ -24,8 +24,9 @@
           <% end %>
         <% end %>
         <br>
-        <%= render "public/favorites/btn", post: post %>
-        <br>
+        <div id="favorite_buttons_<%= post.id %>" >
+          <%= render "public/favorites/btn", post: post %>
+        </div>
         <% post.tags.each do |tag| %>
           <span class="label"><%= tag.name %></span>
         <% end %>
