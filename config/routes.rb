@@ -30,7 +30,9 @@ Rails.application.routes.draw do
 
     resources :users, only: [:edit, :update, :show, :index] do
       member do
-        get :mypage, :follows, :followers
+        get :mypage
+        get :follows, to: 'relationships#follows'
+        get :followers, to: 'relationships#followers'
         patch :withdraw
       end
       resource :relationships, only: [:create, :destroy]

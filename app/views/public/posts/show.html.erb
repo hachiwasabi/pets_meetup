@@ -3,7 +3,7 @@
     <div class="card-body">
       <h2 class="custom-orange">🦉 <%= @post.title %></h2>
       <hr class="custom-hr">
-      <p class="my-1"><%= @post.body %></p>
+      <p class="my-3 fw-bold"><%= @post.body %></p>
 
       <div class="d-flex flex-wrap gap-2">
         <% @post.images.each_with_index do |image, index| %>
@@ -31,7 +31,7 @@
         <span class="label"><%= tag.name %></span>
       <% end %>
       <br>
-      <span class="sentiment-score fw-bold">本文の感情分析スコア <%= @post.score %></span><br>
+      <span class="sentiment-score">本文の感情分析スコア <%= @post.score %></span><br>
       <p class="text-muted mt-3">投稿者: <%= @post.user.name %>さん</p>
 
       <% if user_signed_in? && @post.user == current_user %>
