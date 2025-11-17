@@ -1,15 +1,14 @@
 <div class="container my-5 px-sm-0">
-  <div class="card mb-3 custom-card col-md-8">
+  <div class="card mb-3 custom-card">
     <div class="card-body">
       <h2 class="custom-orange">🦉 <%= @post.title %></h2>
       <hr class="custom-hr">
-      <p class="my-3 fw-bold"><%= @post.body %></p>
 
-      <div class="d-flex flex-wrap gap-2">
+      <div class="d-flex align-items-start my-3 col-md-10">
         <% @post.images.each_with_index do |image, index| %>
           <!-- サムネイル画像 -->
           <%= link_to "#imageModal#{index}", data: { bs_toggle: "modal" } do %>
-            <%= image_tag image.variant(resize_to_limit: [400, 400]).processed, class: "img-thumbnail", style: "object-fit: cover;" %>
+            <%= image_tag image.variant(resize_to_limit: [400, 400]).processed, class: "img-thumbnail my-2", style: "object-fit: cover;" %>
           <% end %>
 
           <!-- モーダル本体 -->
@@ -23,7 +22,9 @@
             </div>
           </div>
         <% end %>
+        <p class="my-3">🐕投稿文🐈<br><br><%= @post.body %></p>
       </div>
+
       <div id="favorite_buttons_<%= @post.id %>" >
         <%= render "public/favorites/btn", post: @post %>
       </div>

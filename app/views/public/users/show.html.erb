@@ -6,10 +6,10 @@
     <div class="card-body">
       <h4 class="card-title custom-orange mb-2">登録情報</h4>
       <hr class="custom-hr">
-      <div class="row align-items-center">
+      <div class="row align-items-center my-4">
         <div class="col-md-2 text-center mb-3 mb-md-0">
         <%= image_tag @user.profile_image.variant(resize_to_limit: [120,120]).processed,
-                      class: "img-fluid rounded profile-image shadow-sm",
+                      class: "img-fluid rounded profile-image shadow-sm",loading: "lazy",
                       alt: "#{@user.name} のプロフィール画像" %>
         </div>
         <div class="col-md-6">
@@ -31,23 +31,13 @@
                 <th scope="row">自己紹介</th>
                 <td><%= simple_format(@user.bio) %></td>
               </tr>
-              <tr>
-                <th scope="row">フォロー数</th>
-                <td><%= link_to @user.followers.count, follows_user_path(@user) %></td>
-              </tr>
-              <tr>
-                <th scope="row">フォロワー数</th>
-                <td><%= link_to @user.followeds.count, followers_user_path(@user) %></td>
-              </tr>
-              <td>
-                <% if current_user.following?(@user) %>
-                  <%= link_to "フォローを外す", user_relationships_path(@user.id), method: :delete, class: "btn btn-danger" %>
-                <% else %>
-                  <%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class: "btn btn-success" %>
-                <% end %>
-              </td>
             </tbody>
           </table>
+        </div>
+        <div class="col-md-4">
+          <div id="follow_count_<%= @user.id %>">
+            <%= render "public/relationships/count", user: @user %>
+          </div>
         </div>
       </div>
     </div>
@@ -67,7 +57,7 @@
                 <% if post.images.attached? %>
                   <%= link_to post_path(post) do %>
                     <%= image_tag post.images.first.variant(resize_to_limit: [200,200]).processed,
-                                  class: "card-img-top rounded-top", style: "object-fit: cover;" %>
+                                  class: "card-img-top rounded-top", style: "object-fit: cover;", loading: "lazy" %>
                   <% end %>
                 <% else %>
                   <div class="bg-soft-orange text-center py-5 rounded-top">No Image</div>
@@ -108,7 +98,7 @@
                   <h5 class="card-title mb-2">
                     <%= link_to group.name, group_path(group), class: "stretched-link fw-semibold" %>
                     <%= link_to group_path(group) do %>
-                      <%= image_tag group.image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded-circle group-icon mb-3" %>
+                      <%= image_tag group.image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded-circle group-icon mb-3", loading: "lazy" %>
                     <% end %>
                   </h5>
                 </div>

@@ -1,14 +1,19 @@
 <div class="container my-5 px-sm-0">
-  <div class="card mb-3 custom-card col-md-8">
+  <div class="card mb-3 custom-card col-md-10">
     <div class="card-body">
       <h2 class="custom-orange">🐰 <%= @group.name %></h2>
       <hr class="custom-hr">
-      <p class="my-1 mt-3"><%= @group.description %><p>
 
-      <!-- サムネイル画像 -->
-      <%= link_to "#", data: { bs_toggle: "modal", bs_target: "#groupImageModal" } do %>
-        <%= image_tag @group.image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded my-2" %>
-      <% end %>
+      <div class="d-flex align-items-start my-3">
+        <!-- サムネイル画像 -->
+        <%= link_to "#", data: { bs_toggle: "modal", bs_target: "#groupImageModal" } do %>
+          <%= image_tag @group.image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded my-2 me-4" %>
+        <% end %>
+        <!-- グループ紹介文 -->
+        <p class="my-1 mt-3">🐈グループ紹介文🐈
+          <br><br><%= @group.description %>
+        </p>
+      </div>
 
       <!-- モーダル本体 -->
       <div class="modal fade" id="groupImageModal" tabindex="-1" aria-labelledby="groupImageModalLabel" aria-hidden="true">
@@ -21,7 +26,7 @@
         </div>
       </div>
 
-      <p class="text-muted">作成者: <%= @group.owner.name %>さん</p>
+      <p class="text-muted">作成者: <%= link_to @group.owner.name, user_path(@group.owner), class: "custom-orange" %>さん</p>
       <% if user_signed_in? && @group.owner == current_user %>
         <%= link_to "編集", edit_group_path(@group), class: "btn btn-outline-primary" %>
         <%= link_to "削除", group_path(@group), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger" %>
@@ -73,7 +78,7 @@
     <% if active_members.any? %>
       <ul class="list-group">
         <% active_members.each do |member| %>
-          <li class="list-group-item"><%= member.name %>さん</li>
+          <li class="list-group-item"><%= link_to member.name, user_path(member), class: "custom-orange" %>さん</li>
         <% end %>
       </ul>
     <% else %>

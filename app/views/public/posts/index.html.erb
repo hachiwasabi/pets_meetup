@@ -20,7 +20,7 @@
         <hr class="custom-hr">
         <% post.images.each do |image| %>
           <%= link_to post_path(post) do %>
-            <% image_tag image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded my-2" %>
+            <% image_tag image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded my-2", loading: "lazy" %>
           <% end %>
         <% end %>
         <br>
