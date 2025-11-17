@@ -32,7 +32,7 @@
       <% end %>
       <br>
       <span class="sentiment-score">本文の感情分析スコア <%= @post.score %></span><br>
-      <p class="text-muted mt-3">投稿者: <%= @post.user.name %>さん</p>
+      <p class="text-muted mt-3">投稿者: <%= link_to @post.user.name, user_path(@post.user), class: "custom-orange" %>さん</p>
 
       <% if user_signed_in? && @post.user == current_user %>
         <%= link_to "編集", edit_post_path(@post), class: "btn btn-outline-primary" %>
