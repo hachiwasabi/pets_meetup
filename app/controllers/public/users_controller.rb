@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:mypage, :edit, :update, :withdraw, :show]
+  before_action :set_user, only: [:mypage, :edit, :update, :withdraw, :show, :follows, :followers]
   before_action :ensure_correct_user, only: [:mypage, :edit, :update, :withdraw]
 
   def mypage
@@ -44,13 +44,11 @@ class Public::UsersController < ApplicationController
   end
 
   def follows
-    user = User.find(params[:id])
-    @user = user.following_users
+    @users = @user.following_users.with_attached_profile_image.page(params[:page]).per(12)
   end
 
   def followers
-    user = User.find(params[:id])
-    @user = user.follower_users
+    @users = @user.follower_users.with_attached_profile_image.page(params[:page]).per(12)
   end
 
 

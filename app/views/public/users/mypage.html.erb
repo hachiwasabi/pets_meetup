@@ -8,7 +8,7 @@
 
       <div class="row align-items-center">
         <div class="col-md-2 text-center mb-3 mb-md-0">
-          <%= image_tag @user.profile_image, class: "img-fluid rounded profile-image shadow-sm", alt: "#{@user.name} のプロフィール画像" %>
+          <%= image_tag @user.profile_image, class: "img-fluid rounded profile-image shadow-sm", alt: "#{@user.name} のプロフィール画像", loading: "lazy" %>
         </div>
 
         <div class="col-md-8">
@@ -33,6 +33,14 @@
               <tr>
                 <th scope="row">自己紹介</th>
                 <td><%= simple_format(@user.bio) %></td>
+              </tr>
+              <tr>
+                <th scope="row">フォロー数</th>
+                <td><%= link_to @user.followers.count, follows_user_path(@user) %></td>
+              </tr>
+              <tr>
+                <th scope="row">フォロワー数</th>
+                <td><%= link_to @user.followeds.count, followers_user_path(@user) %></td>
               </tr>
             </tbody>
           </table>
@@ -68,7 +76,7 @@
                     <div class="d-flex flex-wrap mb-2 post-images">
                       <% post.images.each do |image| %>
                         <%= link_to post_path(post), class: "me-2 mb-2" do %>
-                          <%= image_tag image, class: "img-fluid rounded post-thumb", alt: post.title, size: "200x200" %>
+                          <%= image_tag image, class: "img-fluid rounded post-thumb", alt: post.title, size: "200x200", loading: "lazy" %>
                         <% end %>
                       <% end %>
                     </div>
@@ -93,21 +101,25 @@
     </div>
   </div>
 
-  <!-- 参加中のグループ -->
+  <!-- 参加中のグループカード -->
   <div class="card mb-5 custom-card shadow-sm">
     <div class="card-body">
-      <h4 class="card-title custom-orange mb-2">参加中のグループ</h4>
+      <h4 class="card-title custom-orange mb-2">所属グループ</h4>
       <hr class="custom-hr">
 
       <% approved_groups = @user.group_members.approved.map(&:group) rescue [] %>
       <% if approved_groups.any? %>
-        <div class="row">
+        <div class="row g-4">
           <% approved_groups.each do |group| %>
-            <div class="col-md-6">
-              <div class="card mb-3 group-card">
-                <div class="card-body d-flex justify-content-between align-items-center">
-                  <%= link_to group.name, group_path(group), class: "stretched-link fw-semibold" %>
-                  <span class="badge bg-primary">参加中</span>
+            <div class="col-md-6 col-lg-3">
+              <div class="card group-card shadow-sm h-100">
+                <div class="card-body">
+                  <h5 class="card-title mb-2">
+                    <%= link_to group.name, group_path(group), class: "stretched-link fw-semibold" %>
+                    <%= link_to group_path(group) do %>
+                      <%= image_tag group.image.variant(resize_to_limit: [200, 200]).processed, class: "img-fluid rounded-circle group-icon mb-3", loading: "lazy" %>
+                    <% end %>
+                  </h5>
                 </div>
               </div>
             </div>

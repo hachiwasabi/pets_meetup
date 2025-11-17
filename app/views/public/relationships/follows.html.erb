@@ -1,14 +1,14 @@
 <div class="container my-5">
-  <h1 class="mb-4 custom-orange text-center">🐕 ユーザー一覧</h1>
+  <h1 class="mb-4 custom-orange text-center">🐡 フォロー一覧</h1>
 
-  <% if @users.any? %>
+  <% if @users.exists? %>
     <div class="row g-4">
       <% @users.each do |user| %>
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="card shadow-sm h-100 custom-card text-center p-3">
             <%= link_to user_path(user) do %>
               <%= image_tag user.profile_image.variant(resize_to_limit: [150, 150]).processed,
-                            class: "img-fluid rounded-circle mb-2 profile-image", loading: "lazy" %>
+                            class: "img-fluid rounded-circle mb-2 profile-image" %>
             <% end %>
             
             <h5 class="fw-bold mb-1 custom-orange">
@@ -20,7 +20,7 @@
       <% end %>
     </div>
   <% else %>
-    <p class="text-center text-muted">ユーザーが見つかりません。</p>
+    <h4 class="text-center text-muted">ユーザーはいません。</h4>
   <% end %>
 </div>
 
