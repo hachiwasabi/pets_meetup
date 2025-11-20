@@ -1,6 +1,6 @@
 class Public::GroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_group, only: [:show, :join_request, :approve, :reject, :edit, :update]
+  before_action :set_group, only: [:show, :join_request, :approve, :reject, :edit, :update, :destroy]
 
   def index
     @groups = Group.all.page(params[:page])

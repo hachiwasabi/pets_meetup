@@ -1,50 +1,61 @@
 <div class="container my-5 px-sm-0">
-  <div class="card mb-3 custom-card">
-    <div class="card-body">
-      <h2 class="custom-orange">🦉 <%= @post.title %></h2>
-      <hr class="custom-hr">
-
-      <div class="d-flex align-items-start my-3 col-md-10">
-        <% @post.images.each_with_index do |image, index| %>
-          <!-- サムネイル画像 -->
-          <%= link_to "#imageModal#{index}", data: { bs_toggle: "modal" } do %>
-            <%= image_tag image.variant(resize_to_limit: [400, 400]).processed, class: "img-thumbnail my-2", style: "object-fit: cover;" %>
-          <% end %>
-
-          <!-- モーダル本体 -->
-          <div class="modal fade" id="imageModal<%= index %>" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-              <div class="modal-content bg-transparent border-0">
-                <div class="modal-body text-center p-0">
-                  <%= image_tag image, class: "img-fluid rounded shadow-lg" %>
+  <div class="row g-3">
+    <!-- ▼ 左：画像カード -->
+    <div class="col-md-4">
+      <div class="card mb-3 custom-card h-100">
+        <div class="card-body">
+          <h2 class="custom-orange">🦉 <%= @post.title %></h2>
+          <hr class="custom-hr">
+          <% @post.images.each_with_index do |image, index| %>
+            <!-- サムネイル画像 -->
+            <%= link_to "#imageModal#{index}", data: { bs_toggle: "modal" } do %>
+              <%= image_tag image.variant(resize_to_limit: [400, 400]).processed, class: "img-thumbnail my-2", style: "object-fit: cover;" %>
+            <% end %>
+            <!-- モーダル -->
+            <div class="modal fade" id="imageModal<%= index %>" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content bg-transparent border-0">
+                  <div class="modal-body text-center p-0">
+                    <%= image_tag image, class: "img-fluid rounded shadow-lg" %>
+                  </div>
                 </div>
               </div>
             </div>
+          <% end %>
+          <div id="favorite_buttons_<%= @post.id %>">
+            <%= render "public/favorites/btn", post: @post %>
           </div>
-        <% end %>
-        <p class="my-3">🐕投稿文🐈<br><br><%= @post.body %></p>
+          <% @post.tags.each do |tag| %>
+            <span class="label"><%= tag.name %></span>
+          <% end %>
+          <hr>
+          <span class="sentiment-score">本文の感情分析スコア <%= @post.score %></span><br>
+          <p class="text-muted mt-3">
+            投稿者: <%= link_to @post.user.name, user_path(@post.user), class: "custom-orange" %>さん
+          </p>
+          <% if user_signed_in? && @post.user == current_user %>
+            <%= link_to "編集", edit_post_path(@post), class: "btn btn-outline-primary" %>
+            <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger" %>
+          <% end %>
+        </div>
       </div>
-
-      <div id="favorite_buttons_<%= @post.id %>" >
-        <%= render "public/favorites/btn", post: @post %>
-      </div>
-      <% @post.tags.each do |tag| %>
-        <span class="label"><%= tag.name %></span>
-      <% end %>
-      <br>
-      <span class="sentiment-score">本文の感情分析スコア <%= @post.score %></span><br>
-      <p class="text-muted mt-3">投稿者: <%= link_to @post.user.name, user_path(@post.user), class: "custom-orange" %>さん</p>
-
-      <% if user_signed_in? && @post.user == current_user %>
-        <%= link_to "編集", edit_post_path(@post), class: "btn btn-outline-primary" %>
-        <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger" %>
-      <% end %>
+    </div>
+    <!-- ▼ 右：本文カード -->
+    <div class="col-md-8">
+      <div class="card mb-3 custom-card h-100">
+        <div class="card-body">
+          <h4 class="custom-orange">本文</h4>
+          <hr class="custom-hr"><br>
+          <h6><%= simple_format(@post.body, sanitize: true) %></h6>
+        </div>
+     </div>
     </div>
   </div>
-  <div id="post_comments_<%= @post.id %>" >
+  <!-- コメント部分 -->
+  <div id="post_comments_<%= @post.id %>">
     <%= render "public/comments/index", post: @post %>
   </div>
-  <div id="post_comment_<%= @post.id %>" >
+  <div id="post_comment_<%= @post.id %>">
     <%= render "public/comments/form", post: @post %>
   </div>
 </div>

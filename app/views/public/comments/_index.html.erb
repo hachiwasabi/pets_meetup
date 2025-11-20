@@ -1,9 +1,14 @@
 <hr class="custom-hr">
 
 <h3 class="mb-4 custom-orange">コメント一覧</h3>
-<div class="card col-md-8 mb-3 custom-card">
-  <% @post.comments.each do |comment| %>
-    <%= render "public/comments/comment", comment: comment, post: @post %> 
+  <% if @post.comments.exists? %>
+    <div class="card col-md-8 mb-3 custom-card">
+      <% @post.comments.each do |comment| %>
+        <%= render "public/comments/comment", comment: comment, post: @post %> 
+      <% end %>
+    </div>
+  <% else %>
+    <h4 class="text-center text-muted">コメントはありません。</h4>
   <% end %>
-</div>
+  
 <hr class="custom-hr">
