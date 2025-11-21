@@ -21,7 +21,6 @@
       <h2 class="fw-bold custom-orange">🐇 新着投稿</h2>
       <%= link_to "もっと見る", posts_path, class: "btn btn-soft-blue btn-lg" %>
     </div>
-
     <div class="row g-4">
       <% @posts.first(4).each do |post| %>
         <div class="col-md-6 col-lg-3">
@@ -59,7 +58,6 @@
       <h2 class="fw-bold custom-orange">🐕‍🦺 新着グループ</h2>
       <%= link_to "もっと見る", groups_path, class: "btn btn-soft-blue btn-lg" %>
     </div>
-
     <div class="row g-4">
       <% @groups.first(4).each do |group| %>
         <div class="col-md-6 col-lg-3">
@@ -88,5 +86,4 @@
       <% end %>
     </div>
   </section>
-
 </div>
