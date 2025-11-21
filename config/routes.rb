@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     sessions: "public/sessions"
   }
 
+  root :to =>"homes#top"
+  get "about", to: "homes#about", as: "about"
+
   namespace :admin do
     resources :users, only: [:index, :show] do
       patch :withdraw, on: :member
@@ -48,7 +51,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root :to =>"homes#top"
-  get "about", to: "homes#about", as: "about"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

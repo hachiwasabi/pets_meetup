@@ -1,6 +1,7 @@
 class Public::GroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_group, only: [:show, :join_request, :approve, :reject, :edit, :update, :destroy]
+  before_action :set_member, only: [:approve, :reject]
 
   def index
     @groups = Group.all.page(params[:page])
@@ -49,13 +50,11 @@ class Public::GroupsController < ApplicationController
   end
 
   def approve
-    member = @group.group_members.find(params[:member_id])
     member.update(status: :approved)
     redirect_to @group, notice: "参加を承認しました"
   end
 
   def reject
-    member = @group.group_members.find(params[:member_id])
     member.update(status: :rejected)
     redirect_to @group, alert: "参加を拒否しました"
   end
@@ -64,6 +63,10 @@ class Public::GroupsController < ApplicationController
 
   def set_group
     @group = Group.find(params[:id])
+  end
+
+  def set_member
+    member = @group.group_members.find(params[:member_id])
   end
 
   def group_params

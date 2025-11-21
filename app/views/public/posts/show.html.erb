@@ -11,7 +11,7 @@
             <%= link_to "#imageModal#{index}", data: { bs_toggle: "modal" } do %>
               <%= image_tag image.variant(resize_to_limit: [400, 400]).processed, class: "img-thumbnail my-2", style: "object-fit: cover;" %>
             <% end %>
-            <!-- モーダル -->
+            <!-- モーダル本体 -->
             <div class="modal fade" id="imageModal<%= index %>" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content bg-transparent border-0">

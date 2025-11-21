@@ -34,12 +34,12 @@
     </div>
   </div>
 
-  <%# 参加申請ボタン（オーナー自身と既に申請/承認済みの場合は表示しない） %>
+  <!-- 参加申請ボタン（オーナー自身と既に申請/承認済みの場合は表示しない） -->
   <% unless @group.owner_id == current_user.id || @group.group_members.exists?(user_id: current_user.id) %>
     <%= button_to "参加申請する", join_request_group_path(@group), method: :post, class: "btn bg-soft-orange btn-lg" %>
   <% end %>
 
-  <%# オーナー向け：承認待ちリスト表示 %>
+  <!-- オーナー向け：承認待ちリスト表示 -->
   <% if @group.owner_id == current_user.id %>
     <div class="mb-4">
       <hr class="custom-hr">
@@ -85,7 +85,8 @@
       <h6 class="text-muted">まだ参加メンバーはいません。</h6>
     <% end %>
   </div>
-
+  
+  <!-- グループチャット機能 -->
   <hr class="custom-hr">
   <h4 class="mb-4 custom-orange">グループチャット</h4>
   <div class="card p-3 mb-3" style="height: 300px; overflow-y: auto;">

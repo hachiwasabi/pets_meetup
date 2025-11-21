@@ -8,7 +8,6 @@ class Public::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     @posts = @user.posts.order(created_at: :desc)
     if @user == current_user
       redirect_to mypage_user_path(@user) and return

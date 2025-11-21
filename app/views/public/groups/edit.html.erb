@@ -12,11 +12,6 @@
       </div>
     <% end %>
 
-    <!-- 画像アイコン表示（編集画面用） -->
-    <div class="text-center mb-3">
-      <%= image_tag @group.image.variant(resize_to_limit: [150, 150]).processed,class: "img-fluid rounded-circle mb-2 group-icon" %>
-    </div>
-
     <div class="mb-3">
       <%= f.label :name, "グループ名", class:"form-label custom-orange fs-5 fw-bold" %>
       <%= f.text_field :name, class: "form-control comment-textarea", placeholder: "例）集まれ！ワンちゃん大好き飼い主さん！"  %>
